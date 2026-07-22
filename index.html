@@ -117,8 +117,12 @@ img{max-width:100%;display:block}
 }
 .field textarea{resize:vertical;min-height:78px}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-note{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+.form-trust{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:.82rem;color:var(--muted);font-weight:400}
+.form-trust .stars{color:var(--accent);letter-spacing:1px}
+.form-note{font-size:.78rem;color:var(--muted);margin-top:10px;text-align:center}
 .form-note a{color:var(--dark-secondary);text-decoration:underline}
+/* Sticky mobile CTA */
+.mobile-cta{display:none}
 .form-success{display:none;text-align:center;padding:24px 8px}
 .form-success .ok{width:58px;height:58px;border-radius:50%;background:#e8f6ec;display:grid;place-items:center;margin:0 auto 16px}
 .form-success .ok svg{width:30px;height:30px;color:#1f9d55}
@@ -240,6 +244,14 @@ img{max-width:100%;display:block}
   .footer-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
   .header-cta .phone{display:none}
+  body{padding-bottom:74px}
+  .mobile-cta{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:60;gap:10px;padding:10px 14px;
+    background:#fff;border-top:1px solid var(--border);box-shadow:0 -6px 20px -12px rgba(38,64,76,.5);
+  }
+  .mobile-cta .btn{flex:1;padding:13px 10px;font-size:.95rem}
+  .mobile-cta .btn-call{flex:0 0 54px;background:var(--dark);color:#fff}
+  .mobile-cta .btn-call svg{width:20px;height:20px}
 }
 </style>
 </head>
@@ -272,8 +284,8 @@ img{max-width:100%;display:block}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <span class="eyebrow" style="color:var(--accent)">Maling · Gulve · Gardiner · Markiser</span>
-      <h1>Få dit hjem forvandlet af <span class="hl">Farveeksperten</span></h1>
-      <p class="sub">Fra maling og nye gulve til gardiner og markiser – vi rådgiver, opmåler og udfører opgaven, så resultatet holder. Book en gratis og uforpligtende opmåling i dag.</p>
+      <h1>Forny dit hjem – <span class="hl">book gratis opmåling</span></h1>
+      <p class="sub">Erfarne fagfolk klarer maling, gulve, gardiner og markiser. Book en gratis, uforpligtende opmåling – så får du et præcist tilbud uden overraskelser.</p>
       <ul class="hero-points">
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling og uforpligtende tilbud</li>
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Erfarne fagfolk med garanti på arbejdet</li>
@@ -301,8 +313,8 @@ img{max-width:100%;display:block}
             <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" required>
           </div>
           <div class="field">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" name="email" placeholder="dig@email.dk" required>
+            <label for="email">E-mail <span style="font-weight:400;color:var(--muted)">(valgfrit)</span></label>
+            <input type="email" id="email" name="email" placeholder="dig@email.dk">
           </div>
         </div>
         <div class="field">
@@ -320,8 +332,9 @@ img{max-width:100%;display:block}
           <label for="message">Besked (valgfrit)</label>
           <textarea id="message" name="message" placeholder="Fortæl kort om din opgave…"></textarea>
         </div>
-        <button type="submit" class="btn btn-accent btn-block">Send og få dit tilbud →</button>
-        <p class="form-note">Ved at sende accepterer du vores <a href="#">persondatapolitik</a>. Vi kontakter dig inden for 24 timer.</p>
+        <button type="submit" class="btn btn-accent btn-block">Send og få mit tilbud →</button>
+        <div class="form-trust"><span class="stars">★★★★★</span> 4,9/5 · 2.500+ opgaver løst · svar inden for 24 timer</div>
+        <p class="form-note">Ved at sende accepterer du vores <a href="#">persondatapolitik</a>. Gratis og helt uforpligtende.</p>
       </form>
       <div class="form-success" id="formSuccess">
         <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -539,6 +552,14 @@ img{max-width:100%;display:block}
     </div>
   </div>
 </footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="mobile-cta">
+  <a href="tel:+4500000000" class="btn btn-call" aria-label="Ring til os">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+  <a href="#kontakt" class="btn btn-accent">Få gratis tilbud</a>
+</div>
 
 <script>
 // Mobile menu
