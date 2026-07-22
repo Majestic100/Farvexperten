@@ -79,7 +79,7 @@ img{max-width:100%;display:block}
 
 /* Hero */
 .hero{position:relative;color:#fff;overflow:hidden;background:var(--dark)}
-.hero-bg{position:absolute;inset:0;background:url('https://picsum.photos/seed/farvehjem/1600/1200?grayscale') center/cover;opacity:.16;filter:contrast(1.05)}
+.hero-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px}
 .hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.94) 0%,rgba(55,93,110,.9) 100%)}
 .hero-glow{position:absolute;top:-140px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.4),transparent 70%);pointer-events:none}
 .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:70px 0 84px}
@@ -128,9 +128,9 @@ img{max-width:100%;display:block}
 /* Services - bento */
 .bento{display:grid;grid-template-columns:1.25fr 1fr;gap:20px}
 .bento .col-right{display:grid;gap:20px}
-.service-feature{position:relative;border-radius:var(--r);overflow:hidden;min-height:420px;display:flex;align-items:flex-end;color:#fff}
-.service-feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.service-feature .sf-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,64,76,.1) 30%,rgba(38,64,76,.92) 100%)}
+.service-feature{position:relative;border-radius:var(--r);overflow:hidden;min-height:420px;display:flex;align-items:flex-end;color:#fff;
+  background:linear-gradient(160deg,var(--dark),var(--dark-secondary))}
+.service-feature .sf-tint{position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,64,76,0) 30%,rgba(38,64,76,.85) 100%)}
 .service-feature .sf-body{position:relative;padding:34px 32px}
 .service-feature h3{color:#fff;font-size:1.7rem;margin-bottom:8px}
 .service-feature p{color:rgba(255,255,255,.9);font-weight:300;max-width:340px;margin-bottom:16px}
@@ -154,6 +154,13 @@ img{max-width:100%;display:block}
 .gallery-grid .g-tall{grid-row:span 2}
 .gallery-grid .g-wide{grid-column:span 2}
 .gallery-note{text-align:center;margin-top:22px;font-size:.9rem;color:var(--muted-light)}
+/* Image placeholders (swap for real <img> when photos are provided) */
+.img-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:16px;
+  background:linear-gradient(135deg,#eef1f0,#e3e8e7);color:var(--muted-light)}
+.img-ph svg{width:32px;height:32px;opacity:.55}
+.img-ph span{font-family:'Poppins',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.02em}
+.img-ph.dark{position:absolute;inset:0;background:transparent;color:rgba(255,255,255,.4)}
+.img-ph.dark svg{opacity:.4}
 
 /* Why */
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -163,9 +170,9 @@ img{max-width:100%;display:block}
 .why-list .wico svg{width:22px;height:22px;color:var(--accent)}
 .why-list h4{font-size:1.1rem;margin-bottom:3px}
 .why-list p{color:var(--muted);font-size:.95rem;font-weight:300}
-.why-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:48px 40px;color:#fff;box-shadow:var(--shadow)}
-.why-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.why-visual .wv-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.95),rgba(55,93,110,.9))}
+.why-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:48px 40px;color:#fff;box-shadow:var(--shadow);
+  background:linear-gradient(150deg,var(--dark),var(--dark-secondary))}
+.why-visual .wv-tint{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:24px 24px}
 .why-visual .wv-body{position:relative}
 .why-visual h3{color:#fff;font-size:1.7rem;margin:12px 0 14px}
 .why-visual p{color:rgba(255,255,255,.88);font-weight:300;margin-bottom:28px}
@@ -212,7 +219,7 @@ img{max-width:100%;display:block}
 
 /* CTA */
 .cta{position:relative;color:#fff;text-align:center;overflow:hidden;background:var(--dark)}
-.cta-bg{position:absolute;inset:0;background:url('https://picsum.photos/seed/farvecta/1600/700?grayscale') center/cover;opacity:.14}
+.cta-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px}
 .cta-tint{position:absolute;inset:0;background:linear-gradient(135deg,rgba(38,64,76,.94),rgba(55,93,110,.9))}
 .cta-glow{position:absolute;bottom:-150px;left:-90px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.32),transparent 70%)}
 .cta .wrap{position:relative}
@@ -382,7 +389,8 @@ img{max-width:100%;display:block}
     </div>
     <div class="bento reveal">
       <a href="#kontakt" class="service-feature">
-        <img src="https://picsum.photos/seed/farvemaling/900/1000" alt="Nymalet, lyst rum">
+        <!-- Billed-plads: erstat med <img src="..." alt="Maling"> når foto haves -->
+        <div class="img-ph dark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
         <div class="sf-tint"></div>
         <div class="sf-body">
           <h3>Maling</h3>
@@ -415,15 +423,16 @@ img{max-width:100%;display:block}
       <h2>Se vores arbejde</h2>
       <p>Et udpluk af opgaver, vi har løst for kunder i hele området.</p>
     </div>
+    <!-- Billed-pladser: erstat hver .img-ph med <img src="..." alt="..."> når fotos haves -->
     <div class="gallery-grid reveal">
-      <figure class="g-tall"><img src="https://picsum.photos/seed/farvea/700/900" alt="Projekt: bolig"></figure>
-      <figure class="g-wide"><img src="https://picsum.photos/seed/farveb/900/500" alt="Projekt: bolig"></figure>
-      <figure><img src="https://picsum.photos/seed/farvec/500/500" alt="Projekt: bolig"></figure>
-      <figure><img src="https://picsum.photos/seed/farved/500/500" alt="Projekt: bolig"></figure>
-      <figure class="g-wide"><img src="https://picsum.photos/seed/farvee/900/500" alt="Projekt: bolig"></figure>
-      <figure><img src="https://picsum.photos/seed/farvef/500/500" alt="Projekt: bolig"></figure>
+      <figure class="g-tall"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure class="g-wide"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure class="g-wide"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
     </div>
-    <p class="gallery-note">Billederne er pladsholdere. Erstat dem gerne med jeres egne før- og efter-fotos.</p>
+    <p class="gallery-note">Layoutet er klar til jeres egne før- og efter-fotos.</p>
   </div>
 </section>
 
@@ -452,7 +461,6 @@ img{max-width:100%;display:block}
       </ul>
     </div>
     <div class="why-visual reveal">
-      <img src="https://picsum.photos/seed/farvevisual/800/700?grayscale" alt="Interiør">
       <div class="wv-tint"></div>
       <div class="wv-body">
         <h3>Book din gratis opmåling</h3>
