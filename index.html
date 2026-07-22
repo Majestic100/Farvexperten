@@ -154,12 +154,10 @@ img{max-width:100%;display:block}
 
 /* Gallery */
 .gallery{background:var(--light-bg)}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:18px}
-.gallery-grid figure{position:relative;border-radius:var(--r);overflow:hidden;background:var(--border)}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.gallery-grid figure{position:relative;border-radius:var(--r);overflow:hidden;background:var(--border);aspect-ratio:3/4}
 .gallery-grid figure img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .gallery-grid figure:hover img{transform:scale(1.06)}
-.gallery-grid .g-tall{grid-row:span 2}
-.gallery-grid .g-wide{grid-column:span 2}
 .gallery-note{text-align:center;margin-top:22px;font-size:.9rem;color:var(--muted-light)}
 /* Image placeholders (swap for real <img> when photos are provided) */
 .img-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:16px;
@@ -305,8 +303,7 @@ img{max-width:100%;display:block}
   .loc-grid{grid-template-columns:1fr}
   .team-grid{grid-template-columns:repeat(2,1fr)}
   .trust-grid{grid-template-columns:repeat(2,1fr)}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
-  .gallery-grid .g-wide{grid-column:span 2}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .timeline{grid-template-columns:1fr;gap:34px}
   .timeline::before{display:none}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
@@ -318,8 +315,6 @@ img{max-width:100%;display:block}
 @media(max-width:560px){
   .section{padding:64px 0}
   .trust-grid{grid-template-columns:repeat(2,1fr);gap:20px}
-  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:210px}
-  .gallery-grid .g-wide,.gallery-grid .g-tall{grid-column:auto;grid-row:auto}
   .bento .col-right{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
@@ -343,7 +338,7 @@ img{max-width:100%;display:block}
     <a href="#top" class="logo" aria-label="Farve X-perten"><img class="logo-img" src="assets/img/farvexperten-logo.png" alt="Farve X-perten - Maling, Gulve & Gardiner"></a>
     <nav class="header-nav" id="nav">
       <a class="navlink" href="#ydelser">Ydelser</a>
-      <a class="navlink" href="#arbejde">Vores arbejde</a>
+      <a class="navlink" href="#arbejde">Galleri</a>
       <a class="navlink" href="#butikker">Butikker</a>
       <a class="navlink" href="#derfor">Derfor os</a>
       <a class="navlink" href="#faq">FAQ</a>
@@ -480,19 +475,17 @@ img{max-width:100%;display:block}
 <section class="section gallery" id="arbejde">
   <div class="wrap">
     <div class="section-head center reveal">
-      <h2>Se vores arbejde</h2>
-      <p>Et udpluk af opgaver, vi har løst for private og professionelle kunder på Fyn.</p>
+      <h2>Kig med i butikken</h2>
+      <p>Personlig rådgivning og et stort udvalg. Kom forbi i Svendborg eller Ringe og bliv inspireret.</p>
     </div>
-    <!-- Billed-pladser: erstat hver .img-ph med <img src="..." alt="..."> når fotos haves -->
     <div class="gallery-grid reveal">
-      <figure class="g-tall"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
-      <figure class="g-wide"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
-      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
-      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
-      <figure class="g-wide"><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
-      <figure><div class="img-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Billede</span></div></figure>
+      <figure><img src="assets/img/galleri-1.jpg" alt="Rådgivning i butikken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-2.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-3.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-4.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-5.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-6.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
     </div>
-    <p class="gallery-note">Layoutet er klar til jeres egne før- og efter-fotos.</p>
   </div>
 </section>
 
@@ -538,26 +531,25 @@ img{max-width:100%;display:block}
       <h2>Mød holdet</h2>
       <p>Det faste team i vores Svendborg-butik står klar med rådgivning.</p>
     </div>
-    <!-- Foto-plads: erstat hver .team-ph med <img class="team-photo" src="assets/img/..." alt="Navn"> -->
     <div class="team-grid reveal">
       <div class="team-card">
-        <div class="team-ph">KH</div>
+        <img class="team-photo" src="assets/img/kim.jpg" alt="Kim Sander Hofmann" loading="lazy" width="128" height="128">
         <h3>Kim Sander Hofmann</h3>
         <p class="team-role">Direktør · Industri og erhverv</p>
       </div>
       <div class="team-card">
-        <div class="team-ph">HA</div>
+        <img class="team-photo" src="assets/img/heidi.jpg" alt="Heidi Bech Futte Andersen" loading="lazy" width="128" height="128">
         <h3>Heidi Bech Futte Andersen</h3>
         <p class="team-role">Butiksbestyrer · Maling og konsulentbesøg</p>
         <a class="team-email" href="mailto:futte@farvexperten.dk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>futte@farvexperten.dk</a>
       </div>
       <div class="team-card">
-        <div class="team-ph">KC</div>
+        <img class="team-photo" src="assets/img/kanja.jpg" alt="Kanja Christophersen" loading="lazy" width="128" height="128">
         <h3>Kanja Christophersen</h3>
         <p class="team-role">Butiksansat · Maling og rådgivning</p>
       </div>
       <div class="team-card">
-        <div class="team-ph">CH</div>
+        <img class="team-photo" src="assets/img/christian.jpg" alt="Christian Nymann Hansen" loading="lazy" width="128" height="128">
         <h3>Christian Nymann Hansen</h3>
         <p class="team-role">Sælger · Gulv X-pert</p>
         <a class="team-email" href="mailto:christian@farvexperten.dk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>christian@farvexperten.dk</a>
@@ -711,7 +703,7 @@ img{max-width:100%;display:block}
         <h4>Genveje</h4>
         <ul>
           <li><a href="#ydelser">Ydelser</a></li>
-          <li><a href="#arbejde">Vores arbejde</a></li>
+          <li><a href="#arbejde">Galleri</a></li>
           <li><a href="#butikker">Butikker</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
