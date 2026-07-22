@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farveeksperten – Maling, gulve, gardiner & markiser | Gratis opmåling</title>
+<meta name="description" content="Farveeksperten hjælper dig med maling, gulve, gardiner og markiser. Book en gratis og uforpligtende opmåling eller få et gratis tilbud i dag.">
+<link href="assets/fonts/fonts.css" rel="stylesheet">
+<style>
+:root{
+  --accent:#FB8D0D;
+  --accent-dark:#e57d05;
+  --dark:#26404C;
+  --dark-secondary:#375D6E;
+  --text:#25282B;
+  --muted:#5b6a72;
+  --light-bg:#F8F7F6;
+  --border:#E9E5E0;
+  --white:#FFFFFF;
+  --radius:14px;
+  --shadow:0 18px 50px -20px rgba(38,64,76,.35);
+  --shadow-sm:0 6px 20px -12px rgba(38,64,76,.4);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Roboto',system-ui,-apple-system,Segoe UI,Arial,sans-serif;
+  font-weight:400;color:var(--text);background:var(--white);
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Poppins',system-ui,sans-serif;font-weight:600;line-height:1.15;color:var(--text)}
+.lead-light{font-weight:300}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{
+  font-family:'Poppins',sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;font-size:.72rem;color:var(--accent);
+}
+.section{padding:88px 0}
+.section-head{max-width:640px;margin:0 auto 52px;text-align:center}
+.section-head h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:12px 0 14px}
+.section-head p{color:var(--muted);font-size:1.05rem}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:1rem;
+  padding:15px 28px;border-radius:12px;cursor:pointer;border:none;
+  transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+}
+.btn-accent{background:var(--accent);color:#fff;box-shadow:0 10px 24px -10px rgba(251,141,13,.7)}
+.btn-accent:hover{background:var(--accent-dark);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn-block{width:100%}
+
+/* Header */
+.site-header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.3rem}
+.logo .dot{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:#fff;font-size:1.1rem}
+.logo span{color:var(--dark)}
+.header-nav{display:flex;align-items:center;gap:30px}
+.header-nav a.navlink{font-size:.95rem;color:var(--muted);font-weight:400}
+.header-nav a.navlink:hover{color:var(--text)}
+.header-cta{display:flex;align-items:center;gap:18px}
+.phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark)}
+.phone svg{width:18px;height:18px;color:var(--accent)}
+.btn-sm{padding:11px 20px;font-size:.92rem}
+.menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.menu-toggle span{display:block;width:24px;height:2px;background:var(--dark);margin:5px 0;border-radius:2px}
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(160deg,var(--dark) 0%,var(--dark-secondary) 100%);color:#fff;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;opacity:.09;
+  background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px;
+}
+.hero::after{
+  content:"";position:absolute;top:-120px;right:-120px;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(251,141,13,.35),transparent 70%);
+}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding:76px 0 84px}
+.hero-copy h1{color:#fff;font-size:clamp(2.1rem,4.6vw,3.35rem);letter-spacing:-.01em}
+.hero-copy h1 .hl{color:var(--accent)}
+.hero-copy .sub{margin:22px 0 30px;font-size:1.16rem;font-weight:300;color:rgba(255,255,255,.88);max-width:520px}
+.hero-points{list-style:none;display:grid;gap:14px;margin-bottom:34px}
+.hero-points li{display:flex;align-items:center;gap:12px;font-size:1.02rem;color:rgba(255,255,255,.92)}
+.hero-points .check{flex:0 0 24px;width:24px;height:24px;border-radius:50%;background:rgba(251,141,13,.18);display:grid;place-items:center}
+.hero-points .check svg{width:14px;height:14px;color:var(--accent)}
+.hero-trust-inline{display:flex;align-items:center;gap:14px;font-size:.92rem;color:rgba(255,255,255,.75)}
+.stars{color:var(--accent);letter-spacing:2px}
+
+/* Form card */
+.form-card{background:#fff;color:var(--text);border-radius:18px;box-shadow:var(--shadow);padding:32px 30px;position:relative}
+.form-card .badge{
+  position:absolute;top:-15px;left:30px;background:var(--accent);color:#fff;
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:7px 14px;border-radius:20px;
+}
+.form-card h3{font-size:1.5rem;margin:8px 0 4px}
+.form-card .form-sub{color:var(--muted);font-size:.95rem;margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:600;font-family:'Poppins',sans-serif;margin-bottom:6px;color:var(--dark)}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-family:'Roboto',sans-serif;font-size:.97rem;color:var(--text);background:var(--light-bg);
+  transition:border-color .15s,box-shadow .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(251,141,13,.15);background:#fff;
+}
+.field textarea{resize:vertical;min-height:78px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-note{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+.form-note a{color:var(--dark-secondary);text-decoration:underline}
+.form-success{display:none;text-align:center;padding:24px 8px}
+.form-success .ok{width:58px;height:58px;border-radius:50%;background:#e8f6ec;display:grid;place-items:center;margin:0 auto 16px}
+.form-success .ok svg{width:30px;height:30px;color:#1f9d55}
+.form-success h3{margin-bottom:8px}
+.form-success p{color:var(--muted)}
+
+/* Trust bar */
+.trustbar{background:var(--light-bg);border-bottom:1px solid var(--border)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:42px 0;text-align:center}
+.trust-item .num{font-family:'Poppins',sans-serif;font-weight:700;font-size:2rem;color:var(--dark)}
+.trust-item .lab{font-size:.9rem;color:var(--muted);margin-top:2px}
+
+/* Services */
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.service-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:30px 26px;
+  transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;overflow:hidden;
+}
+.service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:transparent}
+.service-card .ico{width:56px;height:56px;border-radius:13px;background:rgba(251,141,13,.12);display:grid;place-items:center;margin-bottom:18px}
+.service-card .ico svg{width:28px;height:28px;color:var(--accent)}
+.service-card h3{font-size:1.22rem;margin-bottom:8px}
+.service-card p{color:var(--muted);font-size:.95rem;margin-bottom:16px}
+.service-card .more{font-family:'Poppins',sans-serif;font-weight:600;font-size:.92rem;color:var(--accent);display:inline-flex;align-items:center;gap:6px}
+.service-card .more svg{width:15px;height:15px;transition:transform .15s}
+.service-card:hover .more svg{transform:translateX(4px)}
+
+/* Why us */
+.why{background:var(--light-bg)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.why-list{list-style:none;display:grid;gap:22px}
+.why-list li{display:flex;gap:16px}
+.why-list .wico{flex:0 0 46px;width:46px;height:46px;border-radius:11px;background:var(--dark);display:grid;place-items:center}
+.why-list .wico svg{width:22px;height:22px;color:var(--accent)}
+.why-list h4{font-size:1.08rem;margin-bottom:3px}
+.why-list p{color:var(--muted);font-size:.95rem}
+.why-visual{background:linear-gradient(160deg,var(--dark),var(--dark-secondary));border-radius:20px;padding:44px 38px;color:#fff;box-shadow:var(--shadow)}
+.why-visual .eyebrow{color:var(--accent)}
+.why-visual h3{color:#fff;font-size:1.6rem;margin:12px 0 14px}
+.why-visual p{color:rgba(255,255,255,.85);font-weight:300;margin-bottom:26px}
+.why-visual .btn-accent{width:100%}
+
+/* Process */
+.process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;counter-reset:step}
+.process-card{position:relative;padding-top:20px}
+.process-card .step{
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:1rem;color:#fff;background:var(--accent);
+  width:44px;height:44px;border-radius:50%;display:grid;place-items:center;margin-bottom:18px;
+}
+.process-card h3{font-size:1.2rem;margin-bottom:8px}
+.process-card p{color:var(--muted);font-size:.96rem}
+.process-line{display:none}
+
+/* Testimonials */
+.testi{background:var(--dark);color:#fff}
+.testi .section-head h2{color:#fff}
+.testi .section-head p{color:rgba(255,255,255,.75)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi-card{background:var(--dark-secondary);border-radius:var(--radius);padding:30px 28px}
+.testi-card .stars{font-size:1.05rem;margin-bottom:14px;display:block}
+.testi-card p{font-weight:300;color:rgba(255,255,255,.92);font-size:1rem;margin-bottom:20px}
+.testi-card .who{display:flex;align-items:center;gap:12px}
+.testi-card .avatar{width:42px;height:42px;border-radius:50%;background:var(--accent);display:grid;place-items:center;font-family:'Poppins',sans-serif;font-weight:700;color:#fff}
+.testi-card .who .name{font-family:'Poppins',sans-serif;font-weight:600;font-size:.95rem}
+.testi-card .who .role{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+/* FAQ */
+.faq-list{max-width:780px;margin:0 auto;display:grid;gap:14px}
+.faq-item{border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden}
+.faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 22px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:1.02rem;color:var(--text);
+  display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q .ic{flex:0 0 22px;width:22px;height:22px;position:relative;transition:transform .2s}
+.faq-q .ic::before,.faq-q .ic::after{content:"";position:absolute;background:var(--accent);border-radius:2px}
+.faq-q .ic::before{top:10px;left:2px;width:18px;height:2px}
+.faq-q .ic::after{left:10px;top:2px;width:2px;height:18px;transition:transform .2s}
+.faq-item.open .ic::after{transform:rotate(90deg);opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease;color:var(--muted)}
+.faq-a p{padding:0 22px 20px;font-size:.97rem}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,var(--dark),var(--dark-secondary));color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;bottom:-140px;left:-80px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.3),transparent 70%)}
+.cta .wrap{position:relative}
+.cta h2{color:#fff;font-size:clamp(1.7rem,3.6vw,2.5rem);margin-bottom:14px}
+.cta p{color:rgba(255,255,255,.85);font-size:1.1rem;font-weight:300;max-width:560px;margin:0 auto 30px}
+.cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* Footer */
+.footer{background:#1d323b;color:rgba(255,255,255,.7);padding:64px 0 30px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.footer .logo span{color:#fff}
+.footer-about p{margin-top:16px;font-weight:300;font-size:.95rem;max-width:300px}
+.footer h4{color:#fff;font-family:'Poppins',sans-serif;font-size:1rem;margin-bottom:16px}
+.footer ul{list-style:none;display:grid;gap:10px}
+.footer ul li{font-size:.94rem}
+.footer ul a:hover{color:var(--accent)}
+.footer .contact-li{display:flex;gap:10px;align-items:flex-start}
+.footer .contact-li svg{width:17px;height:17px;color:var(--accent);flex:0 0 17px;margin-top:3px}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:48px;padding-top:24px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem}
+
+/* Responsive */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:44px;padding:56px 0 64px}
+  .why-grid{grid-template-columns:1fr;gap:40px}
+  .services-grid,.trust-grid{grid-template-columns:repeat(2,1fr)}
+  .process-grid,.testi-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .header-nav .navlink{display:none}
+  .menu-toggle{display:block}
+  .header-nav.open{position:absolute;top:74px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);
+    flex-direction:column;padding:18px 24px;gap:14px;align-items:stretch}
+  .header-nav.open .navlink{display:block}
+}
+@media(max-width:560px){
+  .section{padding:60px 0}
+  .services-grid,.trust-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .header-cta .phone{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo"><span class="dot">F</span><span>Farve<b style="color:var(--accent)">eksperten</b></span></a>
+    <nav class="header-nav" id="nav">
+      <a class="navlink" href="#ydelser">Ydelser</a>
+      <a class="navlink" href="#derfor">Derfor os</a>
+      <a class="navlink" href="#proces">Sådan foregår det</a>
+      <a class="navlink" href="#anmeldelser">Anmeldelser</a>
+      <a class="navlink" href="#faq">FAQ</a>
+    </nav>
+    <div class="header-cta">
+      <a href="tel:+4500000000" class="phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        +45 00 00 00 00
+      </a>
+      <a href="#kontakt" class="btn btn-accent btn-sm">Gratis tilbud</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO + FORM -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow" style="color:var(--accent)">Maling · Gulve · Gardiner · Markiser</span>
+      <h1>Få dit hjem forvandlet af <span class="hl">Farveeksperten</span></h1>
+      <p class="sub">Fra maling og nye gulve til gardiner og markiser – vi rådgiver, opmåler og udfører opgaven, så resultatet holder. Book en gratis og uforpligtende opmåling i dag.</p>
+      <ul class="hero-points">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling og uforpligtende tilbud</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Erfarne fagfolk med garanti på arbejdet</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Personlig rådgivning fra start til slut</li>
+      </ul>
+      <div class="hero-trust-inline">
+        <span class="stars">★★★★★</span>
+        <span>Anbefalet af hundredvis af tilfredse kunder</span>
+      </div>
+    </div>
+
+    <!-- CONTACT FORM (top of page) -->
+    <div class="form-card" id="kontakt">
+      <span class="badge">Gratis &amp; uforpligtende</span>
+      <form id="leadForm" novalidate>
+        <h3>Få et gratis tilbud</h3>
+        <p class="form-sub">Udfyld formularen – så kontakter vi dig hurtigst muligt.</p>
+        <div class="field">
+          <label for="name">Navn</label>
+          <input type="text" id="name" name="name" placeholder="Dit fulde navn" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="dig@email.dk" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="service">Hvad drejer det sig om?</label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Vælg ydelse…</option>
+            <option>Maling</option>
+            <option>Gulve</option>
+            <option>Gardiner</option>
+            <option>Markiser</option>
+            <option>Flere ydelser / andet</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Besked (valgfrit)</label>
+          <textarea id="message" name="message" placeholder="Fortæl kort om din opgave…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-accent btn-block">Send og få dit tilbud →</button>
+        <p class="form-note">Ved at sende accepterer du vores <a href="#">persondatapolitik</a>. Vi kontakter dig inden for 24 timer.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Tak for din henvendelse!</h3>
+        <p>Vi har modtaget dine oplysninger og vender tilbage inden for 24 timer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<section class="trustbar">
+  <div class="wrap trust-grid">
+    <div class="trust-item"><div class="num">20+</div><div class="lab">års erfaring</div></div>
+    <div class="trust-item"><div class="num">2.500+</div><div class="lab">gennemførte opgaver</div></div>
+    <div class="trust-item"><div class="num">4,9★</div><div class="lab">gennemsnitlig vurdering</div></div>
+    <div class="trust-item"><div class="num">100%</div><div class="lab">tilfredshedsgaranti</div></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="ydelser">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Vores ydelser</span>
+      <h2>Alt til dit hjem – ét sted</h2>
+      <p>Vi løser opgaverne fagligt korrekt, uanset om det er én ydelse eller det hele på én gang.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 3H6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/><path d="M20 7h1a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2h-8"/><path d="M12 12v4"/><rect x="9" y="16" width="6" height="6" rx="1"/></svg></div>
+        <h3>Maling</h3>
+        <p>Ind- og udvendig malerarbejde med en flot, holdbar finish – vægge, lofter, træværk og facader.</p>
+        <a href="#kontakt" class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <h3>Gulve</h3>
+        <p>Trægulve, vinyl og laminat – professionel lægning, slibning og behandling der holder mange år.</p>
+        <a href="#kontakt" class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h16M6 3v18M10 3v18M14 3v18M18 3v18M4 21h16"/></svg></div>
+        <h3>Gardiner</h3>
+        <p>Rullegardiner, plisségardiner og persienner – opmålt og monteret, så det passer perfekt.</p>
+        <a href="#kontakt" class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="service-card">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h18l-2 7H5L3 4z"/><path d="M5 11l-1 4h16l-1-4"/><path d="M12 15v5"/></svg></div>
+        <h3>Markiser</h3>
+        <p>Skyggegivende markiser til terrasse og altan – rådgivning, opmåling og fagligt korrekt montering.</p>
+        <a href="#kontakt" class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section why" id="derfor">
+  <div class="wrap why-grid">
+    <div>
+      <span class="eyebrow">Derfor Farveeksperten</span>
+      <h2 style="font-size:clamp(1.7rem,3.6vw,2.4rem);margin:12px 0 28px">Håndværk du kan regne med</h2>
+      <ul class="why-list">
+        <li>
+          <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <div><h4>Gratis opmåling</h4><p>Vi kommer ud, måler op og giver dig et præcist tilbud – helt uforpligtende.</p></div>
+        </li>
+        <li>
+          <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></span>
+          <div><h4>Erfarne fagfolk</h4><p>Uddannede håndværkere med mange års erfaring og øje for detaljen.</p></div>
+        </li>
+        <li>
+          <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div><h4>Tilfredshedsgaranti</h4><p>Vi er ikke færdige, før du er tilfreds. Kvalitet og aftaler holder vi.</p></div>
+        </li>
+        <li>
+          <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div><h4>Hurtig respons</h4><p>Vi vender tilbage inden for 24 timer og aftaler et tidspunkt, der passer dig.</p></div>
+        </li>
+      </ul>
+    </div>
+    <div class="why-visual">
+      <span class="eyebrow">Klar til at komme i gang?</span>
+      <h3>Book din gratis opmåling</h3>
+      <p>Fortæl os om din opgave, så finder vi den rigtige løsning sammen – uden binding og uden overraskelser.</p>
+      <a href="#kontakt" class="btn btn-accent">Book gratis opmåling →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="proces">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Sådan foregår det</span>
+      <h2>Fra idé til færdigt resultat</h2>
+      <p>En enkel og gennemskuelig proces – du ved altid, hvad det næste skridt er.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card"><div class="step">1</div><h3>Kontakt os</h3><p>Udfyld formularen eller ring til os. Vi lytter til dine ønsker og aftaler en gratis opmåling.</p></div>
+      <div class="process-card"><div class="step">2</div><h3>Opmåling &amp; tilbud</h3><p>Vi kommer ud, måler op og rådgiver dig. Herefter får du et klart, uforpligtende tilbud.</p></div>
+      <div class="process-card"><div class="step">3</div><h3>Udførelse</h3><p>Vores fagfolk går i gang til aftalt tid og leverer et resultat, du bliver glad for – hver gang.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testi" id="anmeldelser">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Anmeldelser</span>
+      <h2>Det siger vores kunder</h2>
+      <p>Vi er stolte af de mange gode tilbagemeldinger fra kunder i hele området.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>„Super professionelt fra start til slut. Malerarbejdet er upåklageligt, og de ryddede pænt op efter sig. Klar anbefaling!"</p>
+        <div class="who"><div class="avatar">MJ</div><div><div class="name">Mette J.</div><div class="role">Villaejer</div></div></div>
+      </div>
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>„Fik lagt nyt gulv i hele stuen. Hurtigt, effektivt og til den aftalte pris. Resultatet ser fantastisk ud."</p>
+        <div class="who"><div class="avatar">PL</div><div><div class="name">Peter L.</div><div class="role">Lejlighed, København</div></div></div>
+      </div>
+      <div class="testi-card">
+        <span class="stars">★★★★★</span>
+        <p>„God rådgivning om både gardiner og markise. De kom ud og målte op og alt passede perfekt. Meget tilfreds."</p>
+        <div class="who"><div class="avatar">SH</div><div><div class="name">Sofie H.</div><div class="role">Rækkehus</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:var(--light-bg)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>Ofte stillede spørgsmål</h2>
+      <p>Har du et andet spørgsmål? Skriv til os i formularen – vi svarer gerne.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">Koster det noget at få et tilbud?<span class="ic"></span></button>
+        <div class="faq-a"><p>Nej. Både opmåling og tilbud er helt gratis og uforpligtende. Du beslutter selv, om du vil gå videre.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Hvor hurtigt kan I komme i gang?<span class="ic"></span></button>
+        <div class="faq-a"><p>Vi vender tilbage inden for 24 timer og aftaler en opmåling. Opstart afhænger af opgavens omfang – men vi finder altid en tid, der passer dig.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Kan I klare flere opgaver på én gang?<span class="ic"></span></button>
+        <div class="faq-a"><p>Ja. Mange kunder får løst både maling, gulve, gardiner og markiser samlet. Det giver ét kontaktpunkt og en mere smidig proces.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Hvilke områder dækker I?<span class="ic"></span></button>
+        <div class="faq-a"><p>Vi arbejder i [dit område – indsæt byer/regioner]. Er du i tvivl, så skriv til os, så oplyser vi, om vi dækker din adresse.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="wrap">
+    <h2>Klar til at forny dit hjem?</h2>
+    <p>Book en gratis, uforpligtende opmåling i dag – så tager vi den derfra sammen.</p>
+    <div class="cta-actions">
+      <a href="#kontakt" class="btn btn-accent">Få gratis tilbud →</a>
+      <a href="tel:+4500000000" class="btn btn-ghost">Ring +45 00 00 00 00</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#top" class="logo"><span class="dot">F</span><span>Farve<b style="color:var(--accent)">eksperten</b></span></a>
+        <p>Din lokale ekspert i maling, gulve, gardiner og markiser. Kvalitetshåndværk og personlig rådgivning – hele vejen.</p>
+      </div>
+      <div>
+        <h4>Ydelser</h4>
+        <ul>
+          <li><a href="#ydelser">Maling</a></li>
+          <li><a href="#ydelser">Gulve</a></li>
+          <li><a href="#ydelser">Gardiner</a></li>
+          <li><a href="#ydelser">Markiser</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Genveje</h4>
+        <ul>
+          <li><a href="#derfor">Derfor os</a></li>
+          <li><a href="#proces">Sådan foregår det</a></li>
+          <li><a href="#anmeldelser">Anmeldelser</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> +45 00 00 00 00</li>
+          <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> kontakt@farveeksperten.dk</li>
+          <li class="contact-li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> [Adresse], [Postnr. By]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Farveeksperten. Alle rettigheder forbeholdes.</span>
+      <span>CVR: [xxxxxxxx] · <a href="#" style="text-decoration:underline">Persondatapolitik</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobile menu
+document.getElementById('menuToggle').addEventListener('click',function(){
+  document.getElementById('nav').classList.toggle('open');
+});
+document.querySelectorAll('#nav .navlink').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('nav').classList.remove('open');});
+});
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=btn.parentElement;
+    var open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight=null;});
+    if(!open){item.classList.add('open');var a=item.querySelector('.faq-a');a.style.maxHeight=a.scrollHeight+'px';}
+  });
+});
+// Form (demo submit – wire to your backend / e-mail service)
+document.getElementById('leadForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  if(!this.checkValidity()){this.reportValidity();return;}
+  // TODO: send data to your endpoint (e.g. Make/Zapier webhook, e-mail, CRM)
+  this.style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+});
+// Year
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
