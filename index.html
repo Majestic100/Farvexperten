@@ -290,6 +290,19 @@ img{max-width:100%;display:block}
 .hours .hr span:first-child{color:var(--text)}
 .loc-map{margin-top:22px;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);line-height:0}
 .loc-map iframe{width:100%;height:220px;border:0;display:block}
+.map-consent{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;background:var(--light-bg);color:var(--muted);font-size:.85rem;line-height:1.5}
+.map-consent .btn{padding:11px 20px;font-size:.9rem}
+
+/* Cookie consent */
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:200;background:var(--dark);color:#fff;padding:18px 20px;box-shadow:0 -12px 34px -14px rgba(0,0,0,.5);display:none}
+.cookie.show{display:block}
+.cookie-in{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:space-between}
+.cookie p{font-size:.9rem;font-weight:300;color:rgba(255,255,255,.9);max-width:660px;margin:0}
+.cookie p a{color:var(--accent);text-decoration:underline}
+.cookie-btns{display:flex;gap:10px;flex-wrap:wrap}
+.cookie .btn{padding:12px 22px;font-size:.9rem}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.08)}
 
 /* Social */
 .socials{display:flex;gap:12px;margin-top:6px}
@@ -702,7 +715,7 @@ img{max-width:100%;display:block}
           <div class="hr"><span>Lørdag</span><span>09:00 - 13:00</span></div>
           <div class="hr"><span>Søndag</span><span>Lukket</span></div>
         </div>
-        <div class="loc-map"><iframe src="https://www.google.com/maps?q=Farve%20X-perten%2C%20Ole%20R%C3%B8mers%20Vej%2061%2C%205700%20Svendborg&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kort til Farve X-perten Svendborg"></iframe></div>
+        <div class="loc-map"><div class="map-consent" data-map="https://www.google.com/maps?q=Farve%20X-perten%2C%20Ole%20R%C3%B8mers%20Vej%2061%2C%205700%20Svendborg&output=embed"><span>Kortet indlæses fra Google og sætter cookies.</span><button type="button" class="btn btn-accent map-load">Vis kort</button></div></div>
       </div>
       <div class="loc-card">
         <div class="loc-head"><h3>Ringe</h3></div>
@@ -717,7 +730,7 @@ img{max-width:100%;display:block}
           <div class="hr"><span>Lørdag</span><span>09:00 - 13:00</span></div>
           <div class="hr"><span>Søndag</span><span>Lukket</span></div>
         </div>
-        <div class="loc-map"><iframe src="https://www.google.com/maps?q=Farve%20X-perten%2C%20G%C3%B8rtlervej%204%2C%205750%20Ringe&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Kort til Farve X-perten Ringe"></iframe></div>
+        <div class="loc-map"><div class="map-consent" data-map="https://www.google.com/maps?q=Farve%20X-perten%2C%20G%C3%B8rtlervej%204%2C%205750%20Ringe&output=embed"><span>Kortet indlæses fra Google og sætter cookies.</span><button type="button" class="btn btn-accent map-load">Vis kort</button></div></div>
       </div>
     </div>
   </div>
@@ -780,6 +793,17 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
+<!-- COOKIE CONSENT -->
+<div class="cookie" id="cookieBanner" role="dialog" aria-label="Cookie-samtykke">
+  <div class="cookie-in">
+    <p>Vi bruger cookies til statistik og markedsføring (Meta Pixel) og til at vise kort fra Google. Nødvendige cookies er altid slået til. Læs mere i vores <a href="privatlivspolitik.html">privatlivspolitik</a>.</p>
+    <div class="cookie-btns">
+      <button type="button" class="btn btn-outline" id="cookieNecessary">Kun nødvendige</button>
+      <button type="button" class="btn btn-accent" id="cookieAll">Accepter alle</button>
+    </div>
+  </div>
+</div>
+
 <!-- STICKY MOBILE CTA -->
 <div class="mobile-cta">
   <a href="tel:+4562224490" class="btn btn-call" aria-label="Ring til os">
@@ -821,9 +845,45 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   e.preventDefault();
   if(!this.checkValidity()){this.reportValidity();return;}
   // TODO: send data to your endpoint (e.g. Make/Zapier webhook, e-mail, CRM)
+  if(window.fbq){fbq('track','Lead');}   // Meta Pixel: conversion når formularen sendes
   this.style.display='none';
   document.getElementById('formSuccess').style.display='block';
 });
+
+// Cookie consent + Meta Pixel + Google Maps gating (GDPR)
+(function(){
+  var KEY='fx_consent';
+  var PIXEL_ID='INDSAET_META_PIXEL_ID';   // <-- Erstat med jeres Meta Pixel ID (15-16 cifre)
+  function loadMeta(){
+    if(window._fbLoaded) return;
+    if(!PIXEL_ID || PIXEL_ID.indexOf('INDSAET')===0) return;  // ID ikke sat endnu
+    window._fbLoaded=true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',PIXEL_ID); fbq('track','PageView');
+  }
+  function loadMap(el){
+    var f=document.createElement('iframe');
+    f.src=el.getAttribute('data-map'); f.loading='lazy'; f.title='Google kort';
+    f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    el.parentNode.replaceChild(f, el);
+  }
+  function loadAllMaps(){document.querySelectorAll('.map-consent').forEach(loadMap);}
+  document.querySelectorAll('.map-load').forEach(function(b){
+    b.addEventListener('click',function(){loadMap(b.closest('.map-consent'));});
+  });
+  var banner=document.getElementById('cookieBanner');
+  function accept(all){
+    localStorage.setItem(KEY, all?'all':'necessary');
+    banner.classList.remove('show');
+    if(all){loadMeta(); loadAllMaps();}
+  }
+  document.getElementById('cookieAll').addEventListener('click',function(){accept(true);});
+  document.getElementById('cookieNecessary').addEventListener('click',function(){accept(false);});
+  var c=localStorage.getItem(KEY);
+  if(c==='all'){loadMeta(); loadAllMaps();}
+  else if(c!=='necessary'){banner.classList.add('show');}
+})();
+
 // Year
 document.getElementById('year').textContent=new Date().getFullYear();
 </script>
