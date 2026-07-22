@@ -10,7 +10,67 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://majestic100.github.io/Farvexperten/">
 <meta property="og:image" content="https://majestic100.github.io/Farvexperten/assets/img/farvexperten-logo.png">
-<link rel="icon" type="image/png" href="assets/img/farvexperten-logo.png">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://majestic100.github.io/Farvexperten/#org",
+      "name": "Farve X-perten Fyn ApS",
+      "url": "https://majestic100.github.io/Farvexperten/",
+      "logo": "https://majestic100.github.io/Farvexperten/assets/img/farvexperten-logo.png",
+      "vatID": "DK28295227",
+      "sameAs": [
+        "https://www.facebook.com/Farve-X-perten-175355152494705",
+        "https://www.instagram.com/farve_x_perten",
+        "https://www.linkedin.com/in/farve-x-perten-aps-232656205"
+      ]
+    },
+    {
+      "@type": "HomeGoodsStore",
+      "name": "Farve X-perten Svendborg",
+      "image": "https://majestic100.github.io/Farvexperten/assets/img/farvexperten-logo.png",
+      "parentOrganization": { "@id": "https://majestic100.github.io/Farvexperten/#org" },
+      "telephone": "+4562224490",
+      "email": "svendborg@farvexperten.dk",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Ole Rømers Vej 61",
+        "postalCode": "5700",
+        "addressLocality": "Svendborg",
+        "addressCountry": "DK"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "17:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+      ]
+    },
+    {
+      "@type": "HomeGoodsStore",
+      "name": "Farve X-perten Ringe",
+      "image": "https://majestic100.github.io/Farvexperten/assets/img/farvexperten-logo.png",
+      "parentOrganization": { "@id": "https://majestic100.github.io/Farvexperten/#org" },
+      "telephone": "+4562633014",
+      "email": "ringe@farvexperten.dk",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gørtlervej 4",
+        "postalCode": "5750",
+        "addressLocality": "Ringe",
+        "addressCountry": "DK"
+      },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "07:00", "closes": "17:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "17:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00" }
+      ]
+    }
+  ]
+}
+</script>
 <link href="assets/fonts/fonts.css" rel="stylesheet">
 <style>
 :root{
@@ -412,7 +472,7 @@ img{max-width:100%;display:block}
         </div>
         <button type="submit" class="btn btn-accent btn-block">Send og få mit tilbud</button>
         <div class="form-trust">Uafhængig farvehandel i Svendborg &amp; Ringe siden 1998</div>
-        <p class="form-note">Ved at sende accepterer du vores <a href="#">persondatapolitik</a>. Gratis og helt uforpligtende.</p>
+        <p class="form-note">Ved at sende accepterer du vores <a href="privatlivspolitik.html">persondatapolitik</a>. Gratis og helt uforpligtende.</p>
       </form>
       <div class="form-success" id="formSuccess">
         <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -715,7 +775,7 @@ img{max-width:100%;display:block}
     </div>
     <div class="footer-bottom">
       <span>© <span id="year"></span> Farve X-perten Fyn ApS. Alle rettigheder forbeholdes.</span>
-      <span>CVR: 28 29 52 27 · <a href="#">Persondatapolitik</a></span>
+      <span>CVR: 28 29 52 27 · <a href="privatlivspolitik.html">Persondatapolitik</a></span>
     </div>
   </div>
 </footer>
