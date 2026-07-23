@@ -137,8 +137,8 @@ img{max-width:100%;display:block}
 .logo-footer{height:42px;filter:brightness(0) invert(1)}
 .logo .dot{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:var(--dark);font-size:1.05rem}
 .logo span{color:var(--dark)}
-.header-nav{display:flex;align-items:center;gap:30px}
-.header-nav a.navlink{font-size:.95rem;color:var(--muted);font-weight:400}
+.header-nav{display:flex;align-items:center;gap:22px}
+.header-nav a.navlink{font-size:.9rem;color:var(--muted);font-weight:400;white-space:nowrap}
 .header-nav a.navlink:hover{color:var(--text)}
 .header-cta{display:flex;align-items:center;gap:18px}
 .phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark)}
@@ -366,6 +366,12 @@ img{max-width:100%;display:block}
 .mobile-cta{display:none}
 
 /* Responsive */
+@media(max-width:1160px){
+  .header-nav .navlink{display:none}
+  .menu-toggle{display:block}
+  .header-nav.open{position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:18px 24px;gap:14px;align-items:stretch}
+  .header-nav.open .navlink{display:block;white-space:normal}
+}
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:44px;padding:52px 0 64px}
   .why-grid{grid-template-columns:1fr;gap:44px}
@@ -377,10 +383,6 @@ img{max-width:100%;display:block}
   .timeline{grid-template-columns:1fr;gap:34px}
   .timeline::before{display:none}
   .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
-  .header-nav .navlink{display:none}
-  .menu-toggle{display:block}
-  .header-nav.open{position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:18px 24px;gap:14px;align-items:stretch}
-  .header-nav.open .navlink{display:block}
 }
 @media(max-width:560px){
   .section{padding:64px 0}
@@ -411,11 +413,11 @@ img{max-width:100%;display:block}
   <div class="wrap header-inner">
     <a href="#top" class="logo" aria-label="Farve X-perten"><img class="logo-img" src="assets/img/farvexperten-logo.png" alt="Farve X-perten - Maling, Gulve & Gardiner"></a>
     <nav class="header-nav" id="nav">
-      <a class="navlink" href="#ydelser">Ydelser</a>
-      <a class="navlink" href="#arbejde">Galleri</a>
-      <a class="navlink" href="#butikker">Butikker</a>
-      <a class="navlink" href="#derfor">Derfor os</a>
-      <a class="navlink" href="#faq">FAQ</a>
+      <a class="navlink" href="#ydelser">Hvad vi hjælper med</a>
+      <a class="navlink" href="#arbejde">Besøg os i butikken</a>
+      <a class="navlink" href="#butikker">Lokationer</a>
+      <a class="navlink" href="#derfor">Derfor skal du vælge os</a>
+      <a class="navlink" href="#faq">Ofte stillede spørgsmål</a>
     </nav>
     <div class="header-cta">
       <a href="tel:+4562224490" class="phone">
@@ -790,10 +792,11 @@ img{max-width:100%;display:block}
       <div>
         <h4>Genveje</h4>
         <ul>
-          <li><a href="#ydelser">Ydelser</a></li>
-          <li><a href="#arbejde">Galleri</a></li>
-          <li><a href="#butikker">Butikker</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#ydelser">Hvad vi hjælper med</a></li>
+          <li><a href="#arbejde">Besøg os i butikken</a></li>
+          <li><a href="#butikker">Lokationer</a></li>
+          <li><a href="#derfor">Derfor skal du vælge os</a></li>
+          <li><a href="#faq">Ofte stillede spørgsmål</a></li>
         </ul>
       </div>
     </div>
