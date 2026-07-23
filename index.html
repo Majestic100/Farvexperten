@@ -24,9 +24,9 @@
       "logo": "https://majestic100.github.io/Farvexperten/assets/img/farvexperten-logo.png",
       "vatID": "DK28295227",
       "sameAs": [
-        "https://www.facebook.com/Farve-X-perten-175355152494705",
-        "https://www.instagram.com/farve_x_perten",
-        "https://www.linkedin.com/in/farve-x-perten-aps-232656205"
+        "https://www.facebook.com/profile.php?id=100057824865691",
+        "https://www.instagram.com/farve_x_perten/",
+        "https://www.linkedin.com/in/farve-x-perten-aps-232656205/"
       ]
     },
     {
@@ -94,7 +94,7 @@
   --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{
   font-family:'Roboto',system-ui,-apple-system,Segoe UI,Arial,sans-serif;font-weight:400;
   color:var(--text);background:var(--white);line-height:1.65;-webkit-font-smoothing:antialiased;
@@ -129,10 +129,12 @@ img{max-width:100%;display:block}
 .btn-sm{padding:11px 20px;font-size:.92rem}
 
 /* Header */
-.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:transform .32s var(--ease)}
+.site-header.nav-hidden{transform:translateY(-100%)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
 .logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem}
 .logo-img{height:44px;width:auto;display:block}
+.logo-footer{height:42px;filter:brightness(0) invert(1)}
 .logo .dot{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:var(--dark);font-size:1.05rem}
 .logo span{color:var(--dark)}
 .header-nav{display:flex;align-items:center;gap:30px}
@@ -386,6 +388,7 @@ img{max-width:100%;display:block}
   .footer-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
   .header-cta .phone{display:none}
+  .header-cta .btn-accent{display:none}
   .team-grid{grid-template-columns:1fr}
   .svc{max-width:none}
   .logo-img{height:36px}
@@ -761,12 +764,12 @@ img{max-width:100%;display:block}
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-about">
-        <a href="#top" class="logo"><span class="dot">X</span><span>Farve <b style="color:var(--accent)">X-perten</b></span></a>
+        <a href="#top" class="logo" aria-label="Farve X-perten"><img class="logo-footer" src="assets/img/farvexperten-logo.png" alt="Farve X-perten"></a>
         <p>Uafhængig farvehandel på Fyn siden 1998. Maling, gulve, solafskærmning, tapet og boligtekstiler til private og erhverv.</p>
         <div class="socials">
-          <a href="https://www.facebook.com/Farve-X-perten-175355152494705" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
-          <a href="https://www.instagram.com/farve_x_perten" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="https://www.linkedin.com/in/farve-x-perten-aps-232656205" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.09V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg></a>
+          <a href="https://www.facebook.com/profile.php?id=100057824865691" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
+          <a href="https://www.instagram.com/farve_x_perten/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.linkedin.com/in/farve-x-perten-aps-232656205/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.64h.05c.53-1 1.83-2.05 3.76-2.05 4.02 0 4.76 2.65 4.76 6.09V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21H9z"/></svg></a>
         </div>
       </div>
       <div>
@@ -819,6 +822,20 @@ img{max-width:100%;display:block}
 
 <script>
 document.documentElement.classList.add('has-js');
+// Auto-hide header on scroll down, show on scroll up
+(function(){
+  var header=document.querySelector('.site-header');
+  var nav=document.getElementById('nav');
+  var last=window.pageYOffset||0, ticking=false;
+  function update(){
+    var y=window.pageYOffset||0;
+    if((nav&&nav.classList.contains('open'))||y<90){header.classList.remove('nav-hidden');}
+    else if(y>last+5){header.classList.add('nav-hidden');}
+    else if(y<last-5){header.classList.remove('nav-hidden');}
+    last=y; ticking=false;
+  }
+  window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
+})();
 // Mobile menu
 document.getElementById('menuToggle').addEventListener('click',function(){
   document.getElementById('nav').classList.toggle('open');
