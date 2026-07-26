@@ -11,14 +11,16 @@ Landingsside for Farveeksperten – maling, gulve, gardiner og markiser.
 
 ## Opsætning der mangler
 
-### 1. Kontaktformular (Web3Forms)
+### 1. Kontaktformular (Web3Forms) — nøgle er sat ✅
 Formularen sender til **marianne@farvexperten.dk** via Web3Forms.
-
-1. Gå til [web3forms.com](https://web3forms.com), indtast `marianne@farvexperten.dk`, og få en gratis access key på mail.
-2. Erstat `INDSAET_WEB3FORMS_ACCESS_KEY` i `index.html` med nøglen.
-3. Send en testbesked og bekræft, at mailen ankommer.
+Access key ligger i `index.html` (den er ikke hemmelig og må gerne stå offentligt).
 
 Gratisplanen dækker 250 henvendelser/måned og gemmer indsendelser i 30 dage i Web3Forms-dashboardet.
+
+**Ved flytning til GoHighLevel (GHL):** hvis der er sat en domænebegrænsning på
+access key'en i Web3Forms, skal det nye domæne tilføjes der, ellers afvises
+indsendelser. Alternativt kan formularen sendes direkte til GHL i stedet — i så
+fald udskiftes kun `fetch(...)`-endpointet i `index.html`.
 
 ### 2. Meta Pixel
 Erstat `INDSAET_META_PIXEL_ID` i `index.html` med jeres Pixel-ID.
