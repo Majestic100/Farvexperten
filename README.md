@@ -25,3 +25,22 @@ fald udskiftes kun `fetch(...)`-endpointet i `index.html`.
 ### 2. Meta Pixel
 Erstat `INDSAET_META_PIXEL_ID` i `index.html` med jeres Pixel-ID.
 Pixel og Google Maps indlæses først, når brugeren accepterer cookies.
+
+### 3. Udgivelse i GHL — to muligheder
+
+**A) Iframe (som tattoo-siden)** — anbefales, hvis siden skal opdateres ofte
+1. Indsæt indholdet af `ghl-iframe-setup.html` i et Custom HTML/Code-element.
+2. Sæt Meta Pixel op i GHL (ikke i koden).
+3. Færdig. Push til `main` opdaterer siden automatisk uden at røre GHL.
+
+Pixel: GHL-siden fyrer `PageView` (first-party, fanger `fbclid`). Formularen
+sender `Lead` op via `postMessage`, så det også fyres first-party. Samme
+`eventID` begge veje, så Meta deduplikerer mod CAPI.
+
+**B) Indsat kode (uden iframe)**
+1. Kør `python3 build-ghl-embed.py` → `ghl-embed.html`
+2. Indsæt hele indholdet i GHL's Custom HTML/Code-element.
+3. Skal gentages, hver gang siden ændres.
+
+CSS er scopet med `:where(#fx-site)` (nul specificitet), så den hverken
+smitter af på GHL's elementer eller overtrumfer sidens egne klasser.
