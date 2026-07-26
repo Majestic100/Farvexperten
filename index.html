@@ -375,6 +375,10 @@ img{max-width:100%;display:block}
 .footer .contact-li svg{width:17px;height:17px;color:var(--accent);flex:0 0 17px;margin-top:3px}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:52px;padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem}
 .footer-bottom a{text-decoration:underline}
+.footer-legal{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.footer-legal button{background:none;border:none;padding:0;font-family:'Roboto',sans-serif;font-size:.85rem;
+  color:inherit;text-decoration:underline;cursor:pointer}
+.footer-legal button:hover,.footer-legal a:hover{color:var(--accent)}
 
 /* Sticky mobile CTA */
 .mobile-cta{display:none}
@@ -837,7 +841,11 @@ img{max-width:100%;display:block}
     </div>
     <div class="footer-bottom">
       <span>© <span id="year"></span> Farve X-perten Fyn ApS. Alle rettigheder forbeholdes.</span>
-      <span>CVR: 28 29 52 27 · <a href="privatlivspolitik.html">Persondatapolitik</a></span>
+      <span class="footer-legal">CVR: 28 29 52 27
+        <a href="privatlivspolitik.html">Privatlivspolitik</a>
+        <a href="cookiepolitik.html">Cookiepolitik</a>
+        <button type="button" id="cookieSettings">Cookieindstillinger</button>
+      </span>
     </div>
   </div>
 </footer>
@@ -903,6 +911,30 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
   },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
   els.forEach(function(e){io.observe(e);});
 })();
+// ---- Meta Conversions API (server-side) ----
+// Indsæt endpointet her, når det er klart (fx et Make-webhook).
+// VIGTIGT: samme event_id sendes til både Pixel og CAPI, så Meta deduplikerer
+// og ikke tæller det samme lead to gange.
+// Bemærk: serveren skal SHA-256-hashe e-mail og telefon, før de sendes til Meta.
+var CAPI_ENDPOINT='';   // fx 'https://hook.eu2.make.com/xxxxxxxxxxxx'
+function fxCookie(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]*)');return m?m[2]:'';}
+function fxEventId(){
+  if(window.crypto&&crypto.randomUUID){return crypto.randomUUID();}
+  return 'lead-'+Date.now()+'-'+Math.random().toString(16).slice(2,10);
+}
+function fxSendCapi(payload){
+  if(!CAPI_ENDPOINT) return;                                  // endpoint ikke sat endnu
+  if(localStorage.getItem('fx_consent')!=='all') return;       // kræver markedsføringssamtykke
+  try{
+    var body=JSON.stringify(payload);
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(CAPI_ENDPOINT,new Blob([body],{type:'application/json'}));
+    }else{
+      fetch(CAPI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true});
+    }
+  }catch(e){}
+}
+
 // Form -> Web3Forms (sender til marianne@farvexperten.dk)
 document.getElementById('leadForm').addEventListener('submit',function(e){
   e.preventDefault();
@@ -912,6 +944,7 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   var err=document.getElementById('formError');
   var original=btn.textContent;
   var fd=new FormData(form);
+  var eventId=fxEventId();
   err.classList.remove('show');
   btn.disabled=true; btn.textContent='Sender...';
   fetch('https://api.web3forms.com/submit',{method:'POST',body:fd})
@@ -922,7 +955,20 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
       if(window.fbq){fbq('track','Lead',{
         content_category: fd.get('Område')||'Ikke angivet',
         content_name: fd.get('Henvendelse')||'Rådgivning'
-      });}
+      },{eventID:eventId});}
+      // Samme event til CAPI med identisk event_id (deduplikering)
+      fxSendCapi({
+        event_name:'Lead',
+        event_id:eventId,
+        event_source_url:location.href,
+        fbp:fxCookie('_fbp'),
+        fbc:fxCookie('_fbc'),
+        navn:fd.get('Navn')||'',
+        email:fd.get('email')||'',
+        telefon:fd.get('Telefon')||'',
+        omraade:fd.get('Område')||'',
+        henvendelse:fd.get('Henvendelse')||''
+      });
       form.style.display='none';
       document.getElementById('formSuccess').style.display='block';
     })
@@ -961,8 +1007,13 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   }
   document.getElementById('cookieAll').addEventListener('click',function(){accept(true);});
   document.getElementById('cookieNecessary').addEventListener('click',function(){accept(false);});
+  // Genåbn banneret: fra footeren eller via cookiepolitik.html (?cookies=1)
+  function reopen(){localStorage.removeItem(KEY);banner.classList.add('show');
+    banner.scrollIntoView({block:'nearest'});}
+  document.getElementById('cookieSettings').addEventListener('click',function(e){e.preventDefault();reopen();});
   var c=localStorage.getItem(KEY);
-  if(c==='all'){loadMeta(); loadAllMaps();}
+  if(/[?&]cookies=1/.test(location.search)){reopen();}
+  else if(c==='all'){loadMeta(); loadAllMaps();}
   else if(c!=='necessary'){banner.classList.add('show');}
 })();
 
