@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Farve X-perten Fyn - Maling, gulve, solafskærmning & boligtekstiler | Svendborg & Ringe</title>
-<meta name="description" content="Farve X-perten er en uafhængig farvehandel på Fyn med butikker i Svendborg og Ringe. Maling, gulve, solafskærmning, tapet og boligtekstiler. Book en gratis, uforpligtende opmåling.">
+<meta name="description" content="Farve X-perten er en uafhængig farvehandel på Fyn med butikker i Svendborg og Ringe. Maling, gulve, solafskærmning, tapet og boligtekstiler. Få gratis rådgivning, opmåling og tilbud.">
 <meta property="og:title" content="Farve X-perten Fyn - uafhængig farvehandel i Svendborg & Ringe">
 <meta property="og:description" content="Maling, gulve, solafskærmning, tapet og boligtekstiler. Konsulentbesøg, opmåling og montering til private og erhverv.">
 <meta property="og:type" content="website">
@@ -178,6 +178,14 @@ img{max-width:100%;display:block}
 .field input::placeholder,.field textarea::placeholder{color:#94a1a9}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(251,141,13,.16);background:#fff}
 .field textarea{resize:vertical;min-height:80px}
+.need-pills{display:flex;flex-wrap:wrap;gap:8px}
+.need-pills input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.field .need-pills label{display:inline-flex;align-items:center;margin:0;padding:9px 15px;border:1.5px solid var(--border);
+  border-radius:22px;background:var(--light-bg);color:var(--muted);font-family:'Roboto',sans-serif;font-size:.88rem;
+  font-weight:400;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+.field .need-pills label:hover{border-color:var(--accent)}
+.need-pills input:checked+label{background:var(--accent);border-color:var(--accent);color:var(--dark);font-weight:600}
+.need-pills input:focus-visible+label{box-shadow:0 0 0 3px rgba(251,141,13,.3)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .form-trust{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;font-size:.85rem;color:var(--muted)}
 .form-trust .stars{color:var(--accent);letter-spacing:1px}
@@ -427,7 +435,7 @@ img{max-width:100%;display:block}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
         62 22 44 90
       </a>
-      <a href="#kontakt" class="btn btn-accent btn-sm">Gratis tilbud</a>
+      <a href="#kontakt" class="btn btn-accent btn-sm">Gratis rådgivning</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -441,10 +449,10 @@ img{max-width:100%;display:block}
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="services-line">Maling. Gulve. Solafskærmning. Boligtekstiler.</div>
-      <h1>Forny dit hjem med <span class="hl">gratis opmåling</span></h1>
+      <h1>Forny dit hjem med <span class="hl">gratis rådgivning</span></h1>
       <p class="sub">Uafhængig farvehandel på Fyn. Vi rådgiver, måler op og skaffer præcis det, du har brug for.</p>
       <ul class="hero-points">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling og uforpligtende tilbud</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning, opmåling og tilbud</li>
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Uafhængig: vi skaffer præcis de produkter, du skal bruge</li>
         <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Konsulentbesøg, opmåling og montering</li>
       </ul>
@@ -455,8 +463,16 @@ img{max-width:100%;display:block}
     <div class="form-card" id="kontakt">
       <span class="badge">Gratis &amp; uforpligtende</span>
       <form id="leadForm" novalidate>
-        <h3>Få et gratis tilbud</h3>
-        <p class="form-sub">Udfyld formularen, så kontakter vi dig hurtigst muligt.</p>
+        <h3>Få gratis rådgivning</h3>
+        <p class="form-sub">Fortæl kort om dit projekt, så vender vi tilbage inden for 24 timer.</p>
+        <div class="field">
+          <label id="needLabel">Hvad har du brug for?</label>
+          <div class="need-pills" role="radiogroup" aria-labelledby="needLabel">
+            <input type="radio" id="need1" name="need" value="Rådgivning" checked><label for="need1">Rådgivning</label>
+            <input type="radio" id="need2" name="need" value="Gratis opmåling"><label for="need2">Gratis opmåling</label>
+            <input type="radio" id="need3" name="need" value="Tilbud"><label for="need3">Tilbud</label>
+          </div>
+        </div>
         <div class="field">
           <label for="name">Navn</label>
           <input type="text" id="name" name="name" placeholder="Dit fulde navn" required>
@@ -487,7 +503,7 @@ img{max-width:100%;display:block}
           <label for="message">Besked (valgfrit)</label>
           <textarea id="message" name="message" placeholder="Fortæl kort om din opgave..."></textarea>
         </div>
-        <button type="submit" class="btn btn-accent btn-block">Send og få mit tilbud</button>
+        <button type="submit" class="btn btn-accent btn-block">Få gratis rådgivning</button>
         <div class="form-trust">Uafhængig farvehandel i Svendborg &amp; Ringe siden 1998</div>
         <p class="form-note">Ved at sende accepterer du vores <a href="privatlivspolitik.html">persondatapolitik</a>. Gratis og helt uforpligtende.</p>
       </form>
@@ -523,7 +539,7 @@ img{max-width:100%;display:block}
         <div class="svc-body">
           <h3>Maling</h3>
           <p>Stort udvalg til inde og ude. Som uafhængig farvehandel skaffer vi præcis det produkt, du har brug for.</p>
-          <span class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
@@ -531,7 +547,7 @@ img{max-width:100%;display:block}
         <div class="svc-body">
           <h3>Gulve</h3>
           <p>Linoleum, træ, vinyl og laminat. Levering, lægning og behandling.</p>
-          <span class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
@@ -539,7 +555,7 @@ img{max-width:100%;display:block}
         <div class="svc-body">
           <h3>Solafskærmning</h3>
           <p>Markiser, persienner og screens til terrasse, altan og vinduer.</p>
-          <span class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
@@ -547,7 +563,7 @@ img{max-width:100%;display:block}
         <div class="svc-body">
           <h3>Tapet, væv &amp; filt</h3>
           <p>Stort udvalg i tapet, væv og filt. Rådgivning og opsætning.</p>
-          <span class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
@@ -555,7 +571,7 @@ img{max-width:100%;display:block}
         <div class="svc-body">
           <h3>Boligtekstiler</h3>
           <p>Gardiner og tekstiler, der giver rummet det sidste præg.</p>
-          <span class="more">Få tilbud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
     </div>
@@ -607,9 +623,9 @@ img{max-width:100%;display:block}
     <div class="why-visual reveal">
       <div class="wv-tint"></div>
       <div class="wv-body">
-        <h3>Book din gratis opmåling</h3>
+        <h3>Vi hjælper dig i gang</h3>
         <p>Fortæl os om din opgave, så finder vi den rigtige løsning sammen. Uden binding og uden overraskelser.</p>
-        <a href="#kontakt" class="btn btn-accent">Book gratis opmåling</a>
+        <a href="#kontakt" class="btn btn-accent">Få gratis rådgivning</a>
       </div>
     </div>
   </div>
@@ -688,8 +704,8 @@ img{max-width:100%;display:block}
     </div>
     <div class="faq-list reveal">
       <div class="faq-item">
-        <button class="faq-q">Koster det noget at få et tilbud?<span class="ic"></span></button>
-        <div class="faq-a"><p>Nej. Både opmåling og tilbud er helt gratis og uforpligtende. Du beslutter selv, om du vil gå videre.</p></div>
+        <button class="faq-q">Koster det noget at få rådgivning eller et tilbud?<span class="ic"></span></button>
+        <div class="faq-a"><p>Nej. Rådgivning, opmåling og tilbud er helt gratis og uforpligtende. Du beslutter selv, om du vil gå videre.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Hvor hurtigt kan I komme i gang?<span class="ic"></span></button>
@@ -759,9 +775,9 @@ img{max-width:100%;display:block}
   <div class="cta-glow"></div>
   <div class="wrap reveal">
     <h2>Klar til at forny dit hjem?</h2>
-    <p>Book en gratis, uforpligtende opmåling i dag, så tager vi den derfra sammen.</p>
+    <p>Få gratis rådgivning om dit projekt. Uforpligtende, og vi vender tilbage inden for 24 timer.</p>
     <div class="cta-actions">
-      <a href="#kontakt" class="btn btn-accent">Få gratis tilbud</a>
+      <a href="#kontakt" class="btn btn-accent">Få gratis rådgivning</a>
       <a href="tel:+4562224490" class="btn btn-ghost">Ring 62 22 44 90</a>
     </div>
   </div>
@@ -826,7 +842,7 @@ img{max-width:100%;display:block}
   <a href="tel:+4562224490" class="btn btn-call" aria-label="Ring til os">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
   </a>
-  <a href="#kontakt" class="btn btn-accent">Få gratis tilbud</a>
+  <a href="#kontakt" class="btn btn-accent">Få gratis rådgivning</a>
 </div>
 
 <script>
