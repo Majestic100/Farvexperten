@@ -911,13 +911,18 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   var btn=document.getElementById('leadSubmit');
   var err=document.getElementById('formError');
   var original=btn.textContent;
+  var fd=new FormData(form);
   err.classList.remove('show');
   btn.disabled=true; btn.textContent='Sender...';
-  fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)})
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:fd})
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.success){throw new Error(data.message||'send_failed');}
-      if(window.fbq){fbq('track','Lead');}   // Meta Pixel: kun ved bekræftet afsendelse
+      // Meta Pixel: kun ved bekræftet afsendelse, med segmentering på ydelse
+      if(window.fbq){fbq('track','Lead',{
+        content_category: fd.get('Område')||'Ikke angivet',
+        content_name: fd.get('Henvendelse')||'Rådgivning'
+      });}
       form.style.display='none';
       document.getElementById('formSuccess').style.display='block';
     })
