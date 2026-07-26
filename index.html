@@ -189,6 +189,11 @@ img{max-width:100%;display:block}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .form-trust{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;font-size:.85rem;color:var(--muted)}
 .form-trust .stars{color:var(--accent);letter-spacing:1px}
+.hp-field{position:absolute!important;width:1px;height:1px;opacity:0;pointer-events:none;left:-9999px}
+.form-error{display:none;margin-top:14px;padding:13px 15px;border-radius:var(--r-sm);background:#fdeaea;border:1px solid #f5c2c2;color:#8f2020;font-size:.88rem;line-height:1.5}
+.form-error a{color:#8f2020;font-weight:600;text-decoration:underline}
+.form-error.show{display:block}
+.btn[disabled]{opacity:.65;cursor:not-allowed}
 .form-note{font-size:.78rem;color:var(--muted-light);margin-top:11px;text-align:center}
 .form-note a{color:var(--dark-secondary);text-decoration:underline}
 .form-success{display:none;text-align:center;padding:26px 8px}
@@ -465,22 +470,30 @@ img{max-width:100%;display:block}
       <form id="leadForm" novalidate>
         <h3>Få gratis rådgivning</h3>
         <p class="form-sub">Fortæl kort om dit projekt, så vender vi tilbage inden for 24 timer.</p>
+
+        <!-- Web3Forms: indsæt jeres access key nedenfor (hentes gratis på web3forms.com) -->
+        <input type="hidden" name="access_key" value="INDSAET_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="Ny henvendelse fra farvexperten.dk">
+        <input type="hidden" name="from_name" value="Farve X-perten hjemmeside">
+        <!-- Honeypot: spam-bots udfylder feltet, mennesker ser det ikke -->
+        <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
+
         <div class="field">
           <label id="needLabel">Hvad har du brug for?</label>
           <div class="need-pills" role="radiogroup" aria-labelledby="needLabel">
-            <input type="radio" id="need1" name="need" value="Rådgivning" checked><label for="need1">Rådgivning</label>
-            <input type="radio" id="need2" name="need" value="Gratis opmåling"><label for="need2">Gratis opmåling</label>
-            <input type="radio" id="need3" name="need" value="Tilbud"><label for="need3">Tilbud</label>
+            <input type="radio" id="need1" name="Henvendelse" value="Rådgivning" checked><label for="need1">Rådgivning</label>
+            <input type="radio" id="need2" name="Henvendelse" value="Gratis opmåling"><label for="need2">Gratis opmåling</label>
+            <input type="radio" id="need3" name="Henvendelse" value="Tilbud"><label for="need3">Tilbud</label>
           </div>
         </div>
         <div class="field">
           <label for="name">Navn</label>
-          <input type="text" id="name" name="name" placeholder="Dit fulde navn" required>
+          <input type="text" id="name" name="Navn" placeholder="Dit fulde navn" required>
         </div>
         <div class="field-row">
           <div class="field">
             <label for="phone">Telefon</label>
-            <input type="tel" id="phone" name="phone" placeholder="12 34 56 78" required>
+            <input type="tel" id="phone" name="Telefon" placeholder="12 34 56 78" required>
           </div>
           <div class="field">
             <label for="email">E-mail <span style="font-weight:400;color:var(--muted)">(valgfrit)</span></label>
@@ -489,7 +502,7 @@ img{max-width:100%;display:block}
         </div>
         <div class="field">
           <label for="service">Hvad drejer det sig om?</label>
-          <select id="service" name="service" required>
+          <select id="service" name="Område" required>
             <option value="" disabled selected>Vælg område...</option>
             <option>Maling</option>
             <option>Gulve</option>
@@ -501,9 +514,12 @@ img{max-width:100%;display:block}
         </div>
         <div class="field">
           <label for="message">Besked (valgfrit)</label>
-          <textarea id="message" name="message" placeholder="Fortæl kort om din opgave..."></textarea>
+          <textarea id="message" name="Besked" placeholder="Fortæl kort om din opgave..."></textarea>
         </div>
-        <button type="submit" class="btn btn-accent btn-block">Få gratis rådgivning</button>
+        <button type="submit" class="btn btn-accent btn-block" id="leadSubmit">Få gratis rådgivning</button>
+        <div class="form-error" id="formError" role="alert">
+          Beskeden kunne ikke sendes lige nu. Ring til os på <a href="tel:+4562224490">62 22 44 90</a>, eller skriv til <a href="mailto:marianne@farvexperten.dk">marianne@farvexperten.dk</a>.
+        </div>
         <div class="form-trust">Uafhængig farvehandel i Svendborg &amp; Ringe siden 1998</div>
         <p class="form-note">Ved at sende accepterer du vores <a href="privatlivspolitik.html">persondatapolitik</a>. Gratis og helt uforpligtende.</p>
       </form>
@@ -887,14 +903,28 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
   },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
   els.forEach(function(e){io.observe(e);});
 })();
-// Form (demo submit - wire to your backend / e-mail service)
+// Form -> Web3Forms (sender til marianne@farvexperten.dk)
 document.getElementById('leadForm').addEventListener('submit',function(e){
   e.preventDefault();
-  if(!this.checkValidity()){this.reportValidity();return;}
-  // TODO: send data to your endpoint (e.g. Make/Zapier webhook, e-mail, CRM)
-  if(window.fbq){fbq('track','Lead');}   // Meta Pixel: conversion når formularen sendes
-  this.style.display='none';
-  document.getElementById('formSuccess').style.display='block';
+  var form=this;
+  if(!form.checkValidity()){form.reportValidity();return;}
+  var btn=document.getElementById('leadSubmit');
+  var err=document.getElementById('formError');
+  var original=btn.textContent;
+  err.classList.remove('show');
+  btn.disabled=true; btn.textContent='Sender...';
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data.success){throw new Error(data.message||'send_failed');}
+      if(window.fbq){fbq('track','Lead');}   // Meta Pixel: kun ved bekræftet afsendelse
+      form.style.display='none';
+      document.getElementById('formSuccess').style.display='block';
+    })
+    .catch(function(){
+      err.classList.add('show');
+      btn.disabled=false; btn.textContent=original;
+    });
 });
 
 // Cookie consent + Meta Pixel + Google Maps gating (GDPR)
