@@ -33,8 +33,7 @@
     // Pixel'en er sat op i GHL, så fbq findes allerede her.
     if (typeof fbq === 'function') {
       fbq('track', 'Lead', {
-        content_category: d.content_category,
-        content_name: d.content_name
+        content_category: d.content_category
       }, { eventID: d.eventID });
     }
   });

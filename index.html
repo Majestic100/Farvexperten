@@ -153,8 +153,14 @@ img{max-width:100%;display:block}
 .hero-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px}
 .hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.94) 0%,rgba(55,93,110,.9) 100%)}
 .hero-glow{position:absolute;top:-140px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.4),transparent 70%);pointer-events:none}
-.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:70px;padding-bottom:84px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;column-gap:56px;row-gap:0;align-items:center;padding-top:70px;padding-bottom:84px}
 .hero-grid>*{min-width:0}
+/* Desktop: teksten øverst i venstre kolonne, punkterne lige under, mens
+   formularen spænder over begge rækker til højre. Mobil: se media query,
+   hvor punkterne i stedet lander efter formularen. */
+.hero-copy{grid-column:1;grid-row:1;align-self:end}
+.hero-extra{grid-column:1;grid-row:2;align-self:start}
+.form-card{grid-column:2;grid-row:1/span 2}
 .hero-copy .eyebrow{color:var(--accent)}
 .hero-copy .services-line{font-family:'Poppins',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--accent);margin-bottom:18px}
 .hero-copy h1{color:#fff;font-size:clamp(2.3rem,4.8vw,3.5rem);letter-spacing:-.02em}
@@ -180,14 +186,6 @@ img{max-width:100%;display:block}
 .field input::placeholder,.field textarea::placeholder{color:#94a1a9}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(251,141,13,.16);background:#fff}
 .field textarea{resize:vertical;min-height:80px}
-.need-pills{display:flex;flex-wrap:wrap;gap:8px}
-.need-pills input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.field .need-pills label{display:inline-flex;align-items:center;margin:0;padding:9px 15px;border:1.5px solid var(--border);
-  border-radius:22px;background:var(--light-bg);color:var(--muted);font-family:'Roboto',sans-serif;font-size:.88rem;
-  font-weight:400;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.field .need-pills label:hover{border-color:var(--accent)}
-.need-pills input:checked+label{background:var(--accent);border-color:var(--accent);color:var(--dark);font-weight:600}
-.need-pills input:focus-visible+label{box-shadow:0 0 0 3px rgba(251,141,13,.3)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .form-trust{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;font-size:.85rem;color:var(--muted)}
 .form-trust .stars{color:var(--accent);letter-spacing:1px}
@@ -405,7 +403,9 @@ img{max-width:100%;display:block}
   .header-nav.open .navlink{display:block;white-space:normal}
 }
 @media(max-width:960px){
-  .hero-grid{grid-template-columns:1fr;gap:44px;padding-top:52px;padding-bottom:64px}
+  .hero-grid{grid-template-columns:1fr;column-gap:0;row-gap:36px;padding-top:52px;padding-bottom:64px}
+  /* Nulstil placeringen, så rækkefølgen bliver tekst -> formular -> punkter */
+  .hero-copy,.hero-extra,.form-card{grid-column:1;grid-row:auto;align-self:auto}
   .why-grid{grid-template-columns:1fr;gap:44px}
   .testi-grid{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
@@ -474,12 +474,6 @@ img{max-width:100%;display:block}
       <div class="services-line">Maling. Gulve. Solafskærmning. Boligtekstiler.</div>
       <h1>Forny dit hjem med <span class="hl">gratis rådgivning</span></h1>
       <p class="sub">Uafhængig farvehandel på Fyn. Vi rådgiver, måler op og skaffer præcis det, du har brug for.</p>
-      <ul class="hero-points">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning og uforpligtende tilbud</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling af gardiner, markiser og gulve</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Vi vender tilbage inden for 24 timer</li>
-      </ul>
-      <div class="hero-rating"><span>Uafhængig farvehandel på Fyn siden 1998 · Svendborg &amp; Ringe</span></div>
     </div>
 
     <!-- CONTACT FORM (top of page) -->
@@ -496,14 +490,6 @@ img{max-width:100%;display:block}
         <!-- Honeypot: spam-bots udfylder feltet, mennesker ser det ikke -->
         <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
 
-        <div class="field">
-          <label id="needLabel">Hvad har du brug for?</label>
-          <div class="need-pills" role="radiogroup" aria-labelledby="needLabel">
-            <input type="radio" id="need1" name="Henvendelse" value="Rådgivning" checked><label for="need1">Rådgivning</label>
-            <input type="radio" id="need2" name="Henvendelse" value="Gratis opmåling"><label for="need2">Gratis opmåling</label>
-            <input type="radio" id="need3" name="Henvendelse" value="Tilbud"><label for="need3">Tilbud</label>
-          </div>
-        </div>
         <div class="field">
           <label for="name">Navn</label>
           <input type="text" id="name" name="Navn" placeholder="Dit fulde navn" required>
@@ -546,6 +532,17 @@ img{max-width:100%;display:block}
         <h3>Tak for din henvendelse!</h3>
         <p>Vi har modtaget dine oplysninger og vender tilbage inden for 24 timer.</p>
       </div>
+    </div>
+
+    <!-- Placeres i venstre kolonne under teksten på desktop, og efter
+         formularen på mobil (se .hero-extra i CSS). -->
+    <div class="hero-extra">
+      <ul class="hero-points">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning og uforpligtende tilbud</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling af gardiner, markiser og gulve</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Vi vender tilbage inden for 24 timer</li>
+      </ul>
+      <div class="hero-rating"><span>Uafhængig farvehandel på Fyn siden 1998 · Svendborg &amp; Ringe</span></div>
     </div>
   </div>
 </section>
@@ -989,8 +986,7 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
       if(!data.success){throw new Error(data.message||'send_failed');}
       // Meta Pixel: kun ved bekræftet afsendelse, med segmentering på ydelse
       if(window.fbq){fbq('track','Lead',{
-        content_category: fd.get('Område')||'Ikke angivet',
-        content_name: fd.get('Henvendelse')||'Rådgivning'
+        content_category: fd.get('Område')||'Ikke angivet'
       },{eventID:eventId});}
       // Kører siden i en iframe (fx en GHL-funnel)? Så sendes eventet op til
       // forældresiden, hvor Pixel'en ligger med first-party cookies. Uden det
@@ -999,8 +995,7 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
         try{
           window.parent.postMessage({
             source:'farvexperten', event:'Lead', eventID:eventId,
-            content_category: fd.get('Område')||'Ikke angivet',
-            content_name: fd.get('Henvendelse')||'Rådgivning'
+            content_category: fd.get('Område')||'Ikke angivet'
           },'*');
         }catch(e){}
       }
@@ -1014,8 +1009,7 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
         navn:fd.get('Navn')||'',
         email:fd.get('email')||'',
         telefon:fd.get('Telefon')||'',
-        omraade:fd.get('Område')||'',
-        henvendelse:fd.get('Henvendelse')||''
+        omraade:fd.get('Område')||''
       });
       form.style.display='none';
       document.getElementById('formSuccess').style.display='block';
