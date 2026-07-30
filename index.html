@@ -131,7 +131,7 @@ img{max-width:100%;display:block}
 /* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:transform .32s var(--ease)}
 .site-header.nav-hidden{transform:translateY(-100%)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;height:72px}
 .logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem}
 .logo-img{height:44px;width:auto;display:block}
 .logo-footer{height:42px;filter:brightness(0) invert(1)}
@@ -141,7 +141,7 @@ img{max-width:100%;display:block}
 .header-nav a.navlink{font-size:.9rem;color:var(--muted);font-weight:400;white-space:nowrap}
 .header-nav a.navlink:hover{color:var(--text)}
 .header-cta{display:flex;align-items:center;gap:18px}
-.phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark)}
+.phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark);white-space:nowrap}
 .phone svg{width:18px;height:18px;color:var(--accent)}
 .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
 .menu-toggle span{display:block;width:24px;height:2px;background:var(--dark);margin:5px 0;border-radius:2px}
@@ -381,9 +381,15 @@ img{max-width:100%;display:block}
 .footer-legal button:hover,.footer-legal a:hover{color:var(--accent)}
 
 /* Sticky mobile CTA */
-.mobile-cta{display:none}
+.mobile-cta{display:none;transition:transform .32s var(--ease)}
+.mobile-cta.cta-hidden{transform:translateY(115%)}
 
 /* Responsive */
+/* Menupunkterne er lange; under 1400px er der ikke plads til telefonnummeret
+   ved siden af. Nummeret findes fortsat i Lokationer, CTA og footeren. */
+@media(max-width:1400px){
+  .header-cta .phone{display:none}
+}
 @media(max-width:1160px){
   .header-nav .navlink{display:none}
   .menu-toggle{display:block}
@@ -875,12 +881,17 @@ document.documentElement.classList.add('has-js');
 (function(){
   var header=document.querySelector('.site-header');
   var nav=document.getElementById('nav');
+  var cta=document.querySelector('.mobile-cta');
   var last=window.pageYOffset||0, ticking=false;
+  function setHidden(hidden){
+    header.classList.toggle('nav-hidden',hidden);
+    if(cta) cta.classList.toggle('cta-hidden',hidden);
+  }
   function update(){
     var y=window.pageYOffset||0;
-    if((nav&&nav.classList.contains('open'))||y<90){header.classList.remove('nav-hidden');}
-    else if(y>last+5){header.classList.add('nav-hidden');}
-    else if(y<last-5){header.classList.remove('nav-hidden');}
+    if((nav&&nav.classList.contains('open'))||y<90){setHidden(false);}
+    else if(y>last+5){setHidden(true);}
+    else if(y<last-5){setHidden(false);}
     last=y; ticking=false;
   }
   window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
