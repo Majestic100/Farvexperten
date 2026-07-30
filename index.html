@@ -204,11 +204,14 @@ img{max-width:100%;display:block}
 .form-success h3{margin-bottom:8px}
 .form-success p{color:var(--muted)}
 
-/* Trust bar */
+/* USP bar */
 .trustbar{background:var(--light-bg);border-bottom:1px solid var(--border)}
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:46px 0;text-align:center}
-.trust-item .num{font-family:'Poppins',sans-serif;font-weight:700;font-size:2.1rem;color:var(--dark)}
-.trust-item .lab{font-size:.9rem;color:var(--muted);margin-top:2px}
+.usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;padding:48px 0}
+.usp{display:flex;gap:16px;align-items:flex-start}
+.usp-ico{flex:0 0 46px;width:46px;height:46px;border-radius:12px;background:var(--dark);display:grid;place-items:center}
+.usp-ico svg{width:22px;height:22px;color:var(--accent)}
+.usp h3{font-size:1.08rem;margin-bottom:4px}
+.usp p{color:var(--muted);font-size:.93rem;font-weight:300;line-height:1.55}
 
 /* Services - image cards */
 .svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
@@ -404,7 +407,7 @@ img{max-width:100%;display:block}
   .testi-grid{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
   .team-grid{grid-template-columns:repeat(2,1fr)}
-  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .usp-grid{grid-template-columns:1fr;gap:26px;padding:38px 0}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .timeline{grid-template-columns:1fr;gap:34px}
   .timeline::before{display:none}
@@ -417,7 +420,7 @@ img{max-width:100%;display:block}
   .hero-copy .services-line{font-size:.66rem;letter-spacing:.1em}
   .hero-points li{font-size:.97rem}
   .hero-rating{font-size:.84rem}
-  .trust-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .usp-grid{grid-template-columns:1fr;gap:24px}
   .footer-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
   .header-cta .phone{display:none}
@@ -469,9 +472,9 @@ img{max-width:100%;display:block}
       <h1>Forny dit hjem med <span class="hl">gratis rådgivning</span></h1>
       <p class="sub">Uafhængig farvehandel på Fyn. Vi rådgiver, måler op og skaffer præcis det, du har brug for.</p>
       <ul class="hero-points">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning, opmåling og tilbud</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Uafhængig: vi skaffer præcis de produkter, du skal bruge</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Konsulentbesøg, opmåling og montering</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning og uforpligtende tilbud</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling af gardiner, markiser og gulve</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Vi vender tilbage inden for 24 timer</li>
       </ul>
       <div class="hero-rating"><span>Uafhængig farvehandel på Fyn siden 1998 · Svendborg &amp; Ringe</span></div>
     </div>
@@ -546,11 +549,28 @@ img{max-width:100%;display:block}
 
 <!-- TRUST BAR -->
 <section class="trustbar">
-  <div class="wrap trust-grid">
-    <div class="trust-item"><div class="num">1998</div><div class="lab">grundlagt i Svendborg</div></div>
-    <div class="trust-item"><div class="num">2</div><div class="lab">butikker på Fyn</div></div>
-    <div class="trust-item"><div class="num">5</div><div class="lab">produktområder</div></div>
-    <div class="trust-item"><div class="num">100%</div><div class="lab">uafhængig farvehandel</div></div>
+  <div class="wrap usp-grid">
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg></span>
+      <div>
+        <h3>Uafhængig farvehandel</h3>
+        <p>Vi er ikke bundet til ét mærke og skaffer præcis de produkter, din opgave kræver.</p>
+      </div>
+    </div>
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="1"/><path d="M6.5 8v3M10 8v4M13.5 8v3M17 8v4"/></svg></span>
+      <div>
+        <h3>Fra opmåling til montering</h3>
+        <p>Konsulentbesøg i hjemmet, professionel opmåling, montering og udlejning af værktøj.</p>
+      </div>
+    </div>
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-7h6v7"/></svg></span>
+      <div>
+        <h3>Alt til renoveringen</h3>
+        <p>Maling, gulve, tapet og solafskærmning under ét tag. På Fyn siden 1998.</p>
+      </div>
+    </div>
   </div>
 </section>
 
