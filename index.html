@@ -132,8 +132,10 @@ img{max-width:100%;display:block}
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:transform .32s var(--ease)}
 .site-header.nav-hidden{transform:translateY(-100%)}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;height:72px}
-.logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem}
-.logo-img{height:44px;width:auto;display:block}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem;flex-shrink:0}
+/* flex:0 0 auto er nødvendigt: uden det klemmer flexboksen logoet vandret,
+   så højden holdes men bredden presses sammen. */
+.logo-img{height:44px;width:auto;display:block;flex:0 0 auto}
 .logo-footer{height:42px;filter:brightness(0) invert(1)}
 .logo .dot{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:var(--dark);font-size:1.05rem}
 .logo span{color:var(--dark)}
