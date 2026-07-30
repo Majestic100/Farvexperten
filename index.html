@@ -206,7 +206,10 @@ img{max-width:100%;display:block}
 
 /* USP bar */
 .trustbar{background:var(--light-bg);border-bottom:1px solid var(--border)}
-.usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;padding:48px 0}
+/* BEMÆRK: brug padding-top/bottom, ikke 'padding:48px 0'. Elementet har også
+   klassen .wrap, og shorthand'en ville nulstille dens 24px sidemargin,
+   så teksten ville ligge helt ude i skærmkanten på mobil. */
+.usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;padding-top:48px;padding-bottom:48px}
 .usp{display:flex;gap:16px;align-items:flex-start}
 .usp-ico{flex:0 0 46px;width:46px;height:46px;border-radius:12px;background:var(--dark);display:grid;place-items:center}
 .usp-ico svg{width:22px;height:22px;color:var(--accent)}
@@ -407,7 +410,7 @@ img{max-width:100%;display:block}
   .testi-grid{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
   .team-grid{grid-template-columns:repeat(2,1fr)}
-  .usp-grid{grid-template-columns:1fr;gap:26px;padding:38px 0}
+  .usp-grid{grid-template-columns:1fr;gap:26px;padding-top:38px;padding-bottom:38px}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .timeline{grid-template-columns:1fr;gap:34px}
   .timeline::before{display:none}
