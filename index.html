@@ -961,9 +961,12 @@ function fxCookie(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]*)
 // Metas pixel hasher værdierne i browseren, før de sendes, så de forlader
 // aldrig maskinen i klartekst.
 var FX_PIXEL_ID='1945994255700190';
-// Kun disse forældresider må modtage persondata. Er siden indlejret et andet
-// sted, sendes eventet uden oplysninger i stedet for at lække dem.
-var FX_ALLOWED_PARENTS=['https://farvexperten.com','https://www.farvexperten.com'];
+// Oplysningerne sendes til den side, siden er indlejret i, uanset domæne, så
+// Advanced Matching ikke går tabt, hvis funnelen flyttes. Beskeden adresseres
+// til forældresidens konkrete origin i stedet for at udsendes bredt.
+// Bemærk: den, der indlejrer siden, kan dermed læse oplysningerne. Skal det
+// begrænses, udfyldes listen herunder med de tilladte domæner.
+var FX_ALLOWED_PARENTS=[];   // tom = alle domæner tillades
 function fxParentOrigin(){
   try{
     if(window.location.ancestorOrigins && window.location.ancestorOrigins.length){
@@ -1036,15 +1039,14 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
       if(window.parent && window.parent!==window){
         try{
           var parentOrigin=fxParentOrigin();
-          var tillid=FX_ALLOWED_PARENTS.indexOf(parentOrigin)!==-1;
+          // Er listen tom, tillades alle domæner. Er den udfyldt, sendes
+          // oplysningerne kun til de nævnte.
+          var tillid=!FX_ALLOWED_PARENTS.length || FX_ALLOWED_PARENTS.indexOf(parentOrigin)!==-1;
           window.parent.postMessage({
             source:'farvexperten', event:'Lead', eventID:eventId,
             content_category: fd.get('Område')||'Ikke angivet',
-            // Persondata sendes kun til en kendt forældreside, og målrettet
-            // dens origin. Er siden indlejret et fremmed sted, fyrer eventet
-            // stadig, men uden oplysninger.
             user: tillid ? user : undefined
-          }, tillid ? parentOrigin : '*');
+          }, (tillid && parentOrigin) ? parentOrigin : '*');
         }catch(e){}
       }
       // Samme event til CAPI med identisk event_id (deduplikering)
