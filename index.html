@@ -954,6 +954,42 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
 // Bemærk: serveren skal SHA-256-hashe e-mail og telefon, før de sendes til Meta.
 var CAPI_ENDPOINT='';   // fx 'https://hook.eu2.make.com/xxxxxxxxxxxx'
 function fxCookie(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]*)');return m?m[2]:'';}
+
+// ---- Advanced Matching ----
+// Kundens oplysninger sendes med Lead-eventet, så Meta kan matche
+// konverteringen mod en profil og lære, hvem der rent faktisk skriver sig op.
+// Metas pixel hasher værdierne i browseren, før de sendes, så de forlader
+// aldrig maskinen i klartekst.
+var FX_PIXEL_ID='1945994255700190';
+// Kun disse forældresider må modtage persondata. Er siden indlejret et andet
+// sted, sendes eventet uden oplysninger i stedet for at lække dem.
+var FX_ALLOWED_PARENTS=['https://farvexperten.com','https://www.farvexperten.com'];
+function fxParentOrigin(){
+  try{
+    if(window.location.ancestorOrigins && window.location.ancestorOrigins.length){
+      return window.location.ancestorOrigins[0];
+    }
+    if(document.referrer){return new URL(document.referrer).origin;}
+  }catch(e){}
+  return '';
+}
+function fxPhone(v){
+  var d=(v||'').replace(/\D/g,'');
+  if(!d) return '';
+  if(d.length===8) d='45'+d;            // dansk nummer uden landekode
+  return d;
+}
+function fxUserData(fd){
+  var u={};
+  var em=(fd.get('email')||'').trim().toLowerCase();
+  var ph=fxPhone(fd.get('Telefon'));
+  var navn=(fd.get('Navn')||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if(em) u.em=em;
+  if(ph) u.ph=ph;
+  if(navn[0]) u.fn=navn[0];
+  if(navn.length>1) u.ln=navn[navn.length-1];
+  return u;
+}
 function fxEventId(){
   if(window.crypto&&crypto.randomUUID){return crypto.randomUUID();}
   return 'lead-'+Date.now()+'-'+Math.random().toString(16).slice(2,10);
@@ -987,19 +1023,28 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.success){throw new Error(data.message||'send_failed');}
+      var user=fxUserData(fd);
       // Meta Pixel: kun ved bekræftet afsendelse, med segmentering på ydelse
-      if(window.fbq){fbq('track','Lead',{
-        content_category: fd.get('Område')||'Ikke angivet'
-      },{eventID:eventId});}
+      if(window.fbq){
+        // Advanced Matching sættes via init; pixel'en hasher selv værdierne
+        if(Object.keys(user).length){try{fbq('init',FX_PIXEL_ID,user);}catch(e){}}
+        fbq('track','Lead',{content_category: fd.get('Område')||'Ikke angivet'},{eventID:eventId});
+      }
       // Kører siden i en iframe (fx en GHL-funnel)? Så sendes eventet op til
       // forældresiden, hvor Pixel'en ligger med first-party cookies. Uden det
       // ville Lead-eventet være låst inde i iframen.
       if(window.parent && window.parent!==window){
         try{
+          var parentOrigin=fxParentOrigin();
+          var tillid=FX_ALLOWED_PARENTS.indexOf(parentOrigin)!==-1;
           window.parent.postMessage({
             source:'farvexperten', event:'Lead', eventID:eventId,
-            content_category: fd.get('Område')||'Ikke angivet'
-          },'*');
+            content_category: fd.get('Område')||'Ikke angivet',
+            // Persondata sendes kun til en kendt forældreside, og målrettet
+            // dens origin. Er siden indlejret et fremmed sted, fyrer eventet
+            // stadig, men uden oplysninger.
+            user: tillid ? user : undefined
+          }, tillid ? parentOrigin : '*');
         }catch(e){}
       }
       // Samme event til CAPI med identisk event_id (deduplikering)

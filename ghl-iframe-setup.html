@@ -23,6 +23,7 @@
 (function () {
   // Kun beskeder fra vores egen landingsside accepteres.
   var TILLADT_DOMAENE = 'https://majestic100.github.io';
+  var PIXEL_ID = '1945994255700190';
 
   window.addEventListener('message', function (e) {
     if (e.origin !== TILLADT_DOMAENE) return;
@@ -32,6 +33,12 @@
 
     // Pixel'en er sat op i GHL, så fbq findes allerede her.
     if (typeof fbq === 'function') {
+      // Advanced Matching: kundens oplysninger gives til pixel'en, så Meta kan
+      // matche konverteringen mod en profil og lære, hvem der konverterer.
+      // Pixel'en hasher selv værdierne, før de sendes.
+      if (d.user && Object.keys(d.user).length) {
+        try { fbq('init', PIXEL_ID, d.user); } catch (err) {}
+      }
       fbq('track', 'Lead', {
         content_category: d.content_category
       }, { eventID: d.eventID });
