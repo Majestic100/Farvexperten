@@ -44,3 +44,34 @@ sender `Lead` op via `postMessage`, så det også fyres first-party. Samme
 
 CSS er scopet med `:where(#fx-site)` (nul specificitet), så den hverken
 smitter af på GHL's elementer eller overtrumfer sidens egne klasser.
+
+---
+
+## Planlagt (ikke implementeret): billedupload via GHL-formular
+
+Kunden vil kunne vurdere facaden på forhånd, så der ønskes **valgfri**
+billedupload. Upload må ikke gøres til et krav, og friktionen skal holdes nede.
+
+**Hvorfor GHL og ikke Web3Forms Pro / Make**
+- Web3Forms har filupload som Pro-funktion (~$18/md) og sender kun til én
+  modtager. Sinan og videografen skal også have kopi.
+- Make er ikke nødvendig: GHL's `Internal Notification`-handling understøtter
+  CC og BCC direkte. (Make-kontoen er desuden på gratisplan med 2/2
+  scenariepladser brugt.)
+- GHL har filupload gratis, og filerne lander sammen med kontakten.
+
+**Opsætning**
+1. GHL-formular med felterne: Navn, Telefon, E-mail, Område, Besked og
+   **Billeder (valgfrit)**.
+2. Workflow: trigger `Form Submitted` -> handling `Internal Notification`
+   -> Til: marianne@farvexperten.dk, CC: Sinan + videograf.
+
+**Rækkefølge, vigtig**
+Den nuværende tracking er verificeret og virker: `Lead` fyrer ved bekræftet
+indsendelse, med dedup-`eventID` til CAPI og Advanced Matching. En GHL-formular
+indsender i sin egen iframe, hvor vores JS ikke kan se den, så trackingen skal
+bygges om.
+
+Byg derfor GHL-formularen på en **testside ved siden af** den nuværende,
+verificér `Lead` i Events Manager (helst med Advanced Matching), og skift
+først derefter. Riv ikke noget ned, før erstatningen er bevist.

@@ -150,8 +150,10 @@ img{max-width:100%;display:block}
 
 /* Hero */
 .hero{position:relative;color:#fff;overflow:hidden;background:var(--dark)}
-.hero-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px}
-.hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.94) 0%,rgba(55,93,110,.9) 100%)}
+.hero-bg{position:absolute;inset:0;background:url('assets/img/hero-butik.jpg') center/cover no-repeat}
+/* Tonen skal være mørk nok til, at hvid tekst og formularen står skarpt oven
+   på fotoet. Testet for WCAG-kontrast. */
+.hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.90) 0%,rgba(55,93,110,.86) 100%)}
 .hero-glow{position:absolute;top:-140px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.4),transparent 70%);pointer-events:none}
 .hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;column-gap:56px;row-gap:0;align-items:center;padding-top:70px;padding-bottom:84px}
 .hero-grid>*{min-width:0}
