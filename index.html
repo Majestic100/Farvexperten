@@ -235,7 +235,7 @@ img{max-width:100%;display:block}
 
 /* Gallery */
 .gallery{background:var(--light-bg)}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .gallery-grid figure{position:relative;border-radius:var(--r);overflow:hidden;background:var(--border);aspect-ratio:3/4}
 .gallery-grid figure img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .gallery-grid figure:hover img{transform:scale(1.06)}
@@ -257,8 +257,8 @@ img{max-width:100%;display:block}
 .why-list h4{font-size:1.1rem;margin-bottom:3px}
 .why-list p{color:var(--muted);font-size:.95rem;font-weight:300}
 .why-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:48px 40px;color:#fff;box-shadow:var(--shadow);
-  background:linear-gradient(150deg,var(--dark),var(--dark-secondary))}
-.why-visual .wv-tint{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:24px 24px}
+  background:url('assets/img/raadgivning.jpg') center/cover no-repeat}
+.why-visual .wv-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.88),rgba(55,93,110,.84))}
 .why-visual .wv-body{position:relative}
 .why-visual h3{color:#fff;font-size:1.7rem;margin:12px 0 14px}
 .why-visual p{color:rgba(255,255,255,.88);font-weight:300;margin-bottom:28px}
@@ -589,7 +589,7 @@ img{max-width:100%;display:block}
     </div>
     <div class="svc-grid reveal">
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="assets/img/maling.jpg" alt="Maling og farvekort" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="assets/img/kort-maling.jpg" alt="Maling blandes i butikken" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Maling</h3>
           <p>Stort udvalg til inde og ude, og rådgivning om forarbejde og produktvalg. Selve malerarbejdet står du eller din håndværker for.</p>
@@ -597,7 +597,7 @@ img{max-width:100%;display:block}
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="assets/img/gulv.jpg" alt="Trægulv lagt i sildeben" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="assets/img/kort-gulve.jpg" alt="Gulvprøver i butikken" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Gulve</h3>
           <p>Linoleum, træ, vinyl og laminat. Gratis opmåling på Fyn, og vores montører lægger gulvet for dig.</p>
@@ -605,7 +605,7 @@ img{max-width:100%;display:block}
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="assets/img/sol.jpg" alt="Gardiner og solafskærmning i stue" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="assets/img/kort-sol.jpg" alt="Solafskærmning i showroom" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Solafskærmning</h3>
           <p>Markiser, persienner og screens. Gratis opmåling, og vi monterer det for dig.</p>
@@ -613,7 +613,7 @@ img{max-width:100%;display:block}
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="assets/img/tapet.jpg" alt="Ruller af tapet, væv og filt" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="assets/img/kort-tapet.jpg" alt="Tapet, væv og filt på rulle" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Tapet, væv &amp; filt</h3>
           <p>Stort udvalg og rådgivning om valg og fremgangsmåde. Opsætningen står du eller din håndværker for.</p>
@@ -621,7 +621,7 @@ img{max-width:100%;display:block}
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="assets/img/bolig.jpg" alt="Boligtekstiler ved vindue" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="assets/img/kort-bolig.jpg" alt="Prøvebøger med boligtekstiler" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Boligtekstiler</h3>
           <p>Gardiner efter mål, opmålt og monteret af vores egne montører.</p>
@@ -640,12 +640,14 @@ img{max-width:100%;display:block}
       <p>Personlig rådgivning og et stort udvalg. Kom forbi i Svendborg eller Ringe og bliv inspireret.</p>
     </div>
     <div class="gallery-grid reveal">
-      <figure><img src="assets/img/galleri-1.jpg" alt="Rådgivning i butikken" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="assets/img/galleri-2.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="assets/img/galleri-3.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="assets/img/galleri-4.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="assets/img/galleri-5.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="assets/img/galleri-6.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-1.jpg" alt="Maling blandes i butikken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-2.jpg" alt="Kunde bliver betjent ved disken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-3.jpg" alt="Medarbejder ved blandemaskinen" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-4.jpg" alt="Personlig rådgivning i butikken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-5.jpg" alt="Rådgivning ved kassen" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-6.jpg" alt="Gulvprøver" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-7.jpg" alt="Prøver af trægulv" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="assets/img/galleri-8.jpg" alt="Tekstilprøver" loading="lazy" width="600" height="900"></figure>
     </div>
   </div>
 </section>
@@ -654,7 +656,7 @@ img{max-width:100%;display:block}
 <section class="section" id="derfor">
   <div class="wrap why-grid">
     <div class="reveal">
-      <h2 style="font-size:clamp(1.8rem,3.8vw,2.6rem);margin-bottom:30px">Håndværk du kan regne med</h2>
+      <h2 style="font-size:clamp(1.8rem,3.8vw,2.6rem);margin-bottom:30px">Rådgivning du kan regne med</h2>
       <ul class="why-list">
         <li>
           <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
