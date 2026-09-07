@@ -60,9 +60,11 @@ img{max-width:100%;display:block}
 /* Header */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:transform .32s var(--ease)}
 .site-header.nav-hidden{transform:translateY(-100%)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
-.logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem}
-.logo-img{height:44px;width:auto;display:block}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;height:72px}
+.logo{display:flex;align-items:center;gap:11px;font-family:'Poppins',sans-serif;font-weight:700;font-size:1.28rem;flex-shrink:0}
+/* flex:0 0 auto er nødvendigt: uden det klemmer flexboksen logoet vandret,
+   så højden holdes men bredden presses sammen. */
+.logo-img{height:44px;width:auto;display:block;flex:0 0 auto}
 .logo-footer{height:42px;filter:brightness(0) invert(1)}
 .logo .dot{width:34px;height:34px;border-radius:9px;background:var(--accent);display:grid;place-items:center;color:var(--dark);font-size:1.05rem}
 .logo span{color:var(--dark)}
@@ -70,23 +72,33 @@ img{max-width:100%;display:block}
 .header-nav a.navlink{font-size:.9rem;color:var(--muted);font-weight:400;white-space:nowrap}
 .header-nav a.navlink:hover{color:var(--text)}
 .header-cta{display:flex;align-items:center;gap:18px}
-.phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark)}
+.phone{display:flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif;font-weight:600;color:var(--dark);white-space:nowrap}
 .phone svg{width:18px;height:18px;color:var(--accent)}
 .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
 .menu-toggle span{display:block;width:24px;height:2px;background:var(--dark);margin:5px 0;border-radius:2px}
 
 /* Hero */
 .hero{position:relative;color:#fff;overflow:hidden;background:var(--dark)}
-.hero-bg{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:26px 26px}
-.hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.94) 0%,rgba(55,93,110,.9) 100%)}
+.hero-bg{position:absolute;inset:0;background:url('https://majestic100.github.io/Farvexperten/assets/img/hero-butik.jpg') center/cover no-repeat}
+/* Tonen skal være mørk nok til, at hvid tekst og formularen står skarpt oven
+   på fotoet. Testet for WCAG-kontrast. */
+.hero-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.90) 0%,rgba(55,93,110,.86) 100%)}
 .hero-glow{position:absolute;top:-140px;right:-120px;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(251,141,13,.4),transparent 70%);pointer-events:none}
-.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-top:70px;padding-bottom:84px}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;column-gap:56px;row-gap:0;align-items:center;padding-top:70px;padding-bottom:84px}
 .hero-grid>*{min-width:0}
+/* Desktop: teksten øverst i venstre kolonne, punkterne lige under, mens
+   formularen spænder over begge rækker til højre. Mobil: se media query,
+   hvor punkterne i stedet lander efter formularen. */
+.hero-copy{grid-column:1;grid-row:1;align-self:end}
+/* Luften mellem undertekst og punkter ligger her (ikke som bundmargin på
+   underteksten), så den ikke også skubber formularen ned på mobil. */
+.hero-extra{grid-column:1;grid-row:2;align-self:start;padding-top:32px}
+.form-card{grid-column:2;grid-row:1/span 2}
 .hero-copy .eyebrow{color:var(--accent)}
 .hero-copy .services-line{font-family:'Poppins',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--accent);margin-bottom:18px}
 .hero-copy h1{color:#fff;font-size:clamp(2.3rem,4.8vw,3.5rem);letter-spacing:-.02em}
 .hero-copy h1 .hl{color:var(--accent)}
-.hero-copy .sub{margin:22px 0 32px;font-size:1.18rem;font-weight:300;color:rgba(255,255,255,.9);max-width:500px}
+.hero-copy .sub{margin:22px 0 0;font-size:1.18rem;font-weight:300;color:rgba(255,255,255,.9);max-width:500px}
 .hero-points{list-style:none;display:grid;gap:14px;margin-bottom:36px}
 .hero-points li{display:flex;align-items:center;gap:13px;font-size:1.03rem;color:rgba(255,255,255,.94)}
 .hero-points .check{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:rgba(251,141,13,.2);display:grid;place-items:center}
@@ -107,14 +119,6 @@ img{max-width:100%;display:block}
 .field input::placeholder,.field textarea::placeholder{color:#94a1a9}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(251,141,13,.16);background:#fff}
 .field textarea{resize:vertical;min-height:80px}
-.need-pills{display:flex;flex-wrap:wrap;gap:8px}
-.need-pills input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-.field .need-pills label{display:inline-flex;align-items:center;margin:0;padding:9px 15px;border:1.5px solid var(--border);
-  border-radius:22px;background:var(--light-bg);color:var(--muted);font-family:'Roboto',sans-serif;font-size:.88rem;
-  font-weight:400;cursor:pointer;transition:background .15s,border-color .15s,color .15s}
-.field .need-pills label:hover{border-color:var(--accent)}
-.need-pills input:checked+label{background:var(--accent);border-color:var(--accent);color:var(--dark);font-weight:600}
-.need-pills input:focus-visible+label{box-shadow:0 0 0 3px rgba(251,141,13,.3)}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .form-trust{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:15px;font-size:.85rem;color:var(--muted)}
 .form-trust .stars{color:var(--accent);letter-spacing:1px}
@@ -131,11 +135,17 @@ img{max-width:100%;display:block}
 .form-success h3{margin-bottom:8px}
 .form-success p{color:var(--muted)}
 
-/* Trust bar */
+/* USP bar */
 .trustbar{background:var(--light-bg);border-bottom:1px solid var(--border)}
-.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:46px 0;text-align:center}
-.trust-item .num{font-family:'Poppins',sans-serif;font-weight:700;font-size:2.1rem;color:var(--dark)}
-.trust-item .lab{font-size:.9rem;color:var(--muted);margin-top:2px}
+/* BEMÆRK: brug padding-top/bottom, ikke 'padding:48px 0'. Elementet har også
+   klassen .wrap, og shorthand'en ville nulstille dens 24px sidemargin,
+   så teksten ville ligge helt ude i skærmkanten på mobil. */
+.usp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;padding-top:48px;padding-bottom:48px}
+.usp{display:flex;gap:16px;align-items:flex-start}
+.usp-ico{flex:0 0 46px;width:46px;height:46px;border-radius:12px;background:var(--dark);display:grid;place-items:center}
+.usp-ico svg{width:22px;height:22px;color:var(--accent)}
+.usp h3{font-size:1.08rem;margin-bottom:4px}
+.usp p{color:var(--muted);font-size:.93rem;font-weight:300;line-height:1.55}
 
 /* Services - image cards */
 .svc-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
@@ -154,7 +164,7 @@ img{max-width:100%;display:block}
 
 /* Gallery */
 .gallery{background:var(--light-bg)}
-.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .gallery-grid figure{position:relative;border-radius:var(--r);overflow:hidden;background:var(--border);aspect-ratio:3/4}
 .gallery-grid figure img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
 .gallery-grid figure:hover img{transform:scale(1.06)}
@@ -176,8 +186,8 @@ img{max-width:100%;display:block}
 .why-list h4{font-size:1.1rem;margin-bottom:3px}
 .why-list p{color:var(--muted);font-size:.95rem;font-weight:300}
 .why-visual{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:48px 40px;color:#fff;box-shadow:var(--shadow);
-  background:linear-gradient(150deg,var(--dark),var(--dark-secondary))}
-.why-visual .wv-tint{position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 1px 1px,#fff 1px,transparent 0);background-size:24px 24px}
+  background:url('https://majestic100.github.io/Farvexperten/assets/img/raadgivning.jpg') center/cover no-repeat}
+.why-visual .wv-tint{position:absolute;inset:0;background:linear-gradient(150deg,rgba(38,64,76,.88),rgba(55,93,110,.84))}
 .why-visual .wv-body{position:relative}
 .why-visual h3{color:#fff;font-size:1.7rem;margin:12px 0 14px}
 .why-visual p{color:rgba(255,255,255,.88);font-weight:300;margin-bottom:28px}
@@ -310,9 +320,15 @@ img{max-width:100%;display:block}
 .footer-legal button:hover,.footer-legal a:hover{color:var(--accent)}
 
 /* Sticky mobile CTA */
-.mobile-cta{display:none}
+.mobile-cta{display:none;transition:transform .32s var(--ease)}
+.mobile-cta.cta-hidden{transform:translateY(115%)}
 
 /* Responsive */
+/* Menupunkterne er lange; under 1400px er der ikke plads til telefonnummeret
+   ved siden af. Nummeret findes fortsat i Lokationer, CTA og footeren. */
+@media(max-width:1400px){
+  .header-cta .phone{display:none}
+}
 @media(max-width:1160px){
   .header-nav .navlink{display:none}
   .menu-toggle{display:block}
@@ -320,12 +336,15 @@ img{max-width:100%;display:block}
   .header-nav.open .navlink{display:block;white-space:normal}
 }
 @media(max-width:960px){
-  .hero-grid{grid-template-columns:1fr;gap:44px;padding-top:52px;padding-bottom:64px}
+  .hero-grid{grid-template-columns:1fr;column-gap:0;row-gap:30px;padding-top:44px;padding-bottom:64px}
+  /* Nulstil placeringen, så rækkefølgen bliver tekst -> formular -> punkter */
+  .hero-copy,.hero-extra,.form-card{grid-column:1;grid-row:auto;align-self:auto}
+  .hero-extra{padding-top:0}
   .why-grid{grid-template-columns:1fr;gap:44px}
   .testi-grid{grid-template-columns:1fr}
   .loc-grid{grid-template-columns:1fr}
   .team-grid{grid-template-columns:repeat(2,1fr)}
-  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .usp-grid{grid-template-columns:1fr;gap:26px;padding-top:38px;padding-bottom:38px}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .timeline{grid-template-columns:1fr;gap:34px}
   .timeline::before{display:none}
@@ -338,7 +357,7 @@ img{max-width:100%;display:block}
   .hero-copy .services-line{font-size:.66rem;letter-spacing:.1em}
   .hero-points li{font-size:.97rem}
   .hero-rating{font-size:.84rem}
-  .trust-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .usp-grid{grid-template-columns:1fr;gap:24px}
   .footer-grid{grid-template-columns:1fr}
   .field-row{grid-template-columns:1fr}
   .header-cta .phone{display:none}
@@ -388,13 +407,7 @@ img{max-width:100%;display:block}
     <div class="hero-copy">
       <div class="services-line">Maling. Gulve. Solafskærmning. Boligtekstiler.</div>
       <h1>Forny dit hjem med <span class="hl">gratis rådgivning</span></h1>
-      <p class="sub">Uafhængig farvehandel på Fyn. Vi rådgiver, måler op og skaffer præcis det, du har brug for.</p>
-      <ul class="hero-points">
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning, opmåling og tilbud</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Uafhængig: vi skaffer præcis de produkter, du skal bruge</li>
-        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Konsulentbesøg, opmåling og montering</li>
-      </ul>
-      <div class="hero-rating"><span>Uafhængig farvehandel på Fyn siden 1998 · Svendborg &amp; Ringe</span></div>
+      <p class="sub">Uafhængig farvehandel på Fyn. Vi rådgiver og leverer materialerne. Gulve, gardiner og markiser monterer vi også.</p>
     </div>
 
     <!-- CONTACT FORM (top of page) -->
@@ -402,7 +415,7 @@ img{max-width:100%;display:block}
       <span class="badge">Gratis &amp; uforpligtende</span>
       <form id="leadForm" novalidate>
         <h3>Få gratis rådgivning</h3>
-        <p class="form-sub">Fortæl kort om dit projekt, så vender vi tilbage inden for 24 timer.</p>
+        <p class="form-sub">Vi betjener kunder på Fyn. Fortæl kort om dit projekt, så vender vi tilbage inden for 24 timer.</p>
 
         <!-- Web3Forms: indsæt jeres access key nedenfor (hentes gratis på web3forms.com) -->
         <input type="hidden" name="access_key" value="fe2071f1-0f3e-49b2-b2d8-5e203ed1c642">
@@ -411,14 +424,6 @@ img{max-width:100%;display:block}
         <!-- Honeypot: spam-bots udfylder feltet, mennesker ser det ikke -->
         <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" autocomplete="off">
 
-        <div class="field">
-          <label id="needLabel">Hvad har du brug for?</label>
-          <div class="need-pills" role="radiogroup" aria-labelledby="needLabel">
-            <input type="radio" id="need1" name="Henvendelse" value="Rådgivning" checked><label for="need1">Rådgivning</label>
-            <input type="radio" id="need2" name="Henvendelse" value="Gratis opmåling"><label for="need2">Gratis opmåling</label>
-            <input type="radio" id="need3" name="Henvendelse" value="Tilbud"><label for="need3">Tilbud</label>
-          </div>
-        </div>
         <div class="field">
           <label for="name">Navn</label>
           <input type="text" id="name" name="Navn" placeholder="Dit fulde navn" required>
@@ -460,18 +465,47 @@ img{max-width:100%;display:block}
         <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
         <h3>Tak for din henvendelse!</h3>
         <p>Vi har modtaget dine oplysninger og vender tilbage inden for 24 timer.</p>
+        <p class="form-note" style="margin-top:14px">Har du mere at tilføje? <a href="#" id="sendIgen">Send en henvendelse mere</a></p>
       </div>
+    </div>
+
+    <!-- Placeres i venstre kolonne under teksten på desktop, og efter
+         formularen på mobil (se .hero-extra i CSS). -->
+    <div class="hero-extra">
+      <ul class="hero-points">
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis rådgivning og uforpligtende tilbud</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Gratis opmåling af gardiner, markiser og gulve</li>
+        <li><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span> Vi vender tilbage inden for 24 timer</li>
+      </ul>
+      <div class="hero-rating"><span>Uafhængig farvehandel på Fyn siden 1998 · Svendborg &amp; Ringe</span></div>
     </div>
   </div>
 </section>
 
 <!-- TRUST BAR -->
 <section class="trustbar">
-  <div class="wrap trust-grid">
-    <div class="trust-item"><div class="num">1998</div><div class="lab">grundlagt i Svendborg</div></div>
-    <div class="trust-item"><div class="num">2</div><div class="lab">butikker på Fyn</div></div>
-    <div class="trust-item"><div class="num">5</div><div class="lab">produktområder</div></div>
-    <div class="trust-item"><div class="num">100%</div><div class="lab">uafhængig farvehandel</div></div>
+  <div class="wrap usp-grid">
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg></span>
+      <div>
+        <h3>Uafhængig farvehandel</h3>
+        <p>Vi er ikke bundet til ét mærke og skaffer præcis de produkter, din opgave kræver.</p>
+      </div>
+    </div>
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="1"/><path d="M6.5 8v3M10 8v4M13.5 8v3M17 8v4"/></svg></span>
+      <div>
+        <h3>Opmåling og montering</h3>
+        <p>Gratis opmåling på hele Fyn. Vi monterer gulve, gardiner og markiser, der er købt hos os.</p>
+      </div>
+    </div>
+    <div class="usp">
+      <span class="usp-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-7h6v7"/></svg></span>
+      <div>
+        <h3>Alt til renoveringen</h3>
+        <p>Maling, gulve, tapet og solafskærmning under ét tag. På Fyn siden 1998.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -484,42 +518,42 @@ img{max-width:100%;display:block}
     </div>
     <div class="svc-grid reveal">
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/maling.jpg" alt="Maling og farvekort" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/kort-maling.jpg" alt="Maling blandes i butikken" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Maling</h3>
-          <p>Stort udvalg til inde og ude. Som uafhængig farvehandel skaffer vi præcis det produkt, du har brug for.</p>
+          <p>Stort udvalg til inde og ude, og rådgivning om forarbejde og produktvalg. Selve malerarbejdet står du eller din håndværker for.</p>
           <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/gulv.jpg" alt="Trægulv lagt i sildeben" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/kort-gulve.jpg" alt="Gulvprøver i butikken" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Gulve</h3>
-          <p>Linoleum, træ, vinyl og laminat. Levering, lægning og behandling.</p>
+          <p>Linoleum, træ, vinyl og laminat. Gratis opmåling på Fyn, og vores montører lægger gulvet for dig.</p>
           <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/sol.jpg" alt="Gardiner og solafskærmning i stue" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/kort-sol.jpg" alt="Solafskærmning i showroom" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Solafskærmning</h3>
-          <p>Markiser, persienner og screens til terrasse, altan og vinduer.</p>
+          <p>Markiser, persienner og screens. Gratis opmåling, og vi monterer det for dig.</p>
           <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/tapet.jpg" alt="Ruller af tapet, væv og filt" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/kort-tapet.jpg" alt="Tapet, væv og filt på rulle" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Tapet, væv &amp; filt</h3>
-          <p>Stort udvalg i tapet, væv og filt. Rådgivning og opsætning.</p>
+          <p>Stort udvalg og rådgivning om valg og fremgangsmåde. Opsætningen står du eller din håndværker for.</p>
           <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
       <a href="#kontakt" class="svc">
-        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/bolig.jpg" alt="Boligtekstiler ved vindue" loading="lazy" width="346" height="200">
+        <img class="svc-img" src="https://majestic100.github.io/Farvexperten/assets/img/kort-bolig.jpg" alt="Prøvebøger med boligtekstiler" loading="lazy" width="346" height="200">
         <div class="svc-body">
           <h3>Boligtekstiler</h3>
-          <p>Gardiner og tekstiler, der giver rummet det sidste præg.</p>
+          <p>Gardiner efter mål, opmålt og monteret af vores egne montører.</p>
           <span class="more">Få gratis rådgivning <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
         </div>
       </a>
@@ -535,12 +569,14 @@ img{max-width:100%;display:block}
       <p>Personlig rådgivning og et stort udvalg. Kom forbi i Svendborg eller Ringe og bliv inspireret.</p>
     </div>
     <div class="gallery-grid reveal">
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-1.jpg" alt="Rådgivning i butikken" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-2.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-3.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-4.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-5.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
-      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-6.jpg" alt="Farve X-perten butik" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-1.jpg" alt="Maling blandes i butikken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-2.jpg" alt="Kunde bliver betjent ved disken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-3.jpg" alt="Medarbejder ved blandemaskinen" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-4.jpg" alt="Personlig rådgivning i butikken" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-5.jpg" alt="Rådgivning ved kassen" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-6.jpg" alt="Gulvprøver" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-7.jpg" alt="Prøver af trægulv" loading="lazy" width="600" height="900"></figure>
+      <figure><img src="https://majestic100.github.io/Farvexperten/assets/img/galleri-8.jpg" alt="Tekstilprøver" loading="lazy" width="600" height="900"></figure>
     </div>
   </div>
 </section>
@@ -549,7 +585,7 @@ img{max-width:100%;display:block}
 <section class="section" id="derfor">
   <div class="wrap why-grid">
     <div class="reveal">
-      <h2 style="font-size:clamp(1.8rem,3.8vw,2.6rem);margin-bottom:30px">Håndværk du kan regne med</h2>
+      <h2 style="font-size:clamp(1.8rem,3.8vw,2.6rem);margin-bottom:30px">Rådgivning du kan regne med</h2>
       <ul class="why-list">
         <li>
           <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
@@ -561,7 +597,7 @@ img{max-width:100%;display:block}
         </li>
         <li>
           <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></span>
-          <div><h4>Levering &amp; montering</h4><p>Vi klarer også opsætning og montering, så du får en færdig løsning uden besvær.</p></div>
+          <div><h4>Montering af gulve, gardiner og markiser</h4><p>Har du købt produktet hos os, klarer vores montører opsætningen. Maling og tapet står du selv for.</p></div>
         </li>
         <li>
           <span class="wico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="3"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a5 5 0 0 0-3-4.58"/></svg></span>
@@ -600,8 +636,8 @@ img{max-width:100%;display:block}
         <a class="team-email" href="mailto:futte@farvexperten.dk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>futte@farvexperten.dk</a>
       </div>
       <div class="team-card">
-        <img class="team-photo" src="https://majestic100.github.io/Farvexperten/assets/img/kanja.jpg" alt="Kanja Christophersen" loading="lazy" width="128" height="128">
-        <h3>Kanja Christophersen</h3>
+        <img class="team-photo" src="https://majestic100.github.io/Farvexperten/assets/img/marie.jpg" alt="Marie" loading="lazy" width="128" height="128">
+        <h3>Marie</h3>
         <p class="team-role">Butiksansat · Maling og rådgivning</p>
       </div>
       <div class="team-card">
@@ -625,7 +661,7 @@ img{max-width:100%;display:block}
     <div class="timeline reveal">
       <div class="tl-step"><div class="num">1</div><h3>Kontakt os</h3><p>Udfyld formularen eller ring til en af vores butikker. Vi aftaler et konsulentbesøg.</p></div>
       <div class="tl-step"><div class="num">2</div><h3>Konsulentbesøg &amp; opmåling</h3><p>Vi kommer ud, rådgiver og måler op. Herefter får du et klart, uforpligtende tilbud.</p></div>
-      <div class="tl-step"><div class="num">3</div><h3>Levering &amp; montering</h3><p>Vi leverer og monterer, så du får en færdig løsning, du bliver glad for.</p></div>
+      <div class="tl-step"><div class="num">3</div><h3>Levering</h3><p>Du får varerne og en plan for opgaven. Er det gulve, gardiner eller markiser, monterer vi dem også.</p></div>
     </div>
   </div>
 </section>
@@ -653,6 +689,10 @@ img{max-width:100%;display:block}
     </div>
     <div class="faq-list reveal">
       <div class="faq-item">
+        <button class="faq-q">Udfører I selv malerarbejdet?<span class="ic"></span></button>
+        <div class="faq-a"><p>Nej. Vi er en farvehandel, ikke et malerfirma. Vi rådgiver om forarbejde, produktvalg og fremgangsmåde og leverer materialerne, men selve malerarbejdet udfører du eller din egen håndværker. Det samme gælder tapet, væv og filt. Vi udlejer også malersprøjte, spartelpumpe og slibemaskiner, hvis du selv går i gang.<br><br>Gulve, gardiner og markiser er undtagelsen: her måler vi gratis op på hele Fyn og monterer det for dig, når produktet er købt hos os.</p></div>
+      </div>
+      <div class="faq-item">
         <button class="faq-q">Koster det noget at få rådgivning eller et tilbud?<span class="ic"></span></button>
         <div class="faq-a"><p>Nej. Rådgivning, opmåling og tilbud er helt gratis og uforpligtende. Du beslutter selv, om du vil gå videre.</p></div>
       </div>
@@ -662,7 +702,7 @@ img{max-width:100%;display:block}
       </div>
       <div class="faq-item">
         <button class="faq-q">Kan I klare flere opgaver på én gang?<span class="ic"></span></button>
-        <div class="faq-a"><p>Ja. Mange kunder får løst flere ting samlet, fx maling, gulve, solafskærmning og boligtekstiler. Det giver ét kontaktpunkt og en mere smidig proces.</p></div>
+        <div class="faq-a"><p>Ja. Mange kunder klarer flere ting samlet, fx maling, gulve, solafskærmning og boligtekstiler. Det giver ét kontaktpunkt og en mere smidig proces.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q">Hvilke områder dækker I?<span class="ic"></span></button>
@@ -804,12 +844,17 @@ document.documentElement.classList.add('has-js');
 (function(){
   var header=document.querySelector('.site-header');
   var nav=document.getElementById('nav');
+  var cta=document.querySelector('.mobile-cta');
   var last=window.pageYOffset||0, ticking=false;
+  function setHidden(hidden){
+    header.classList.toggle('nav-hidden',hidden);
+    if(cta) cta.classList.toggle('cta-hidden',hidden);
+  }
   function update(){
     var y=window.pageYOffset||0;
-    if((nav&&nav.classList.contains('open'))||y<90){header.classList.remove('nav-hidden');}
-    else if(y>last+5){header.classList.add('nav-hidden');}
-    else if(y<last-5){header.classList.remove('nav-hidden');}
+    if((nav&&nav.classList.contains('open'))||y<90){setHidden(false);}
+    else if(y>last+5){setHidden(true);}
+    else if(y<last-5){setHidden(false);}
     last=y; ticking=false;
   }
   window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true;}},{passive:true});
@@ -847,6 +892,45 @@ document.querySelectorAll('.faq-q').forEach(function(btn){
 // Bemærk: serveren skal SHA-256-hashe e-mail og telefon, før de sendes til Meta.
 var CAPI_ENDPOINT='';   // fx 'https://hook.eu2.make.com/xxxxxxxxxxxx'
 function fxCookie(n){var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]*)');return m?m[2]:'';}
+
+// ---- Advanced Matching ----
+// Kundens oplysninger sendes med Lead-eventet, så Meta kan matche
+// konverteringen mod en profil og lære, hvem der rent faktisk skriver sig op.
+// Metas pixel hasher værdierne i browseren, før de sendes, så de forlader
+// aldrig maskinen i klartekst.
+var FX_PIXEL_ID='1945994255700190';
+// Oplysningerne sendes til den side, siden er indlejret i, uanset domæne, så
+// Advanced Matching ikke går tabt, hvis funnelen flyttes. Beskeden adresseres
+// til forældresidens konkrete origin i stedet for at udsendes bredt.
+// Bemærk: den, der indlejrer siden, kan dermed læse oplysningerne. Skal det
+// begrænses, udfyldes listen herunder med de tilladte domæner.
+var FX_ALLOWED_PARENTS=[];   // tom = alle domæner tillades
+function fxParentOrigin(){
+  try{
+    if(window.location.ancestorOrigins && window.location.ancestorOrigins.length){
+      return window.location.ancestorOrigins[0];
+    }
+    if(document.referrer){return new URL(document.referrer).origin;}
+  }catch(e){}
+  return '';
+}
+function fxPhone(v){
+  var d=(v||'').replace(/\D/g,'');
+  if(!d) return '';
+  if(d.length===8) d='45'+d;            // dansk nummer uden landekode
+  return d;
+}
+function fxUserData(fd){
+  var u={};
+  var em=(fd.get('email')||'').trim().toLowerCase();
+  var ph=fxPhone(fd.get('Telefon'));
+  var navn=(fd.get('Navn')||'').trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if(em) u.em=em;
+  if(ph) u.ph=ph;
+  if(navn[0]) u.fn=navn[0];
+  if(navn.length>1) u.ln=navn[navn.length-1];
+  return u;
+}
 function fxEventId(){
   if(window.crypto&&crypto.randomUUID){return crypto.randomUUID();}
   return 'lead-'+Date.now()+'-'+Math.random().toString(16).slice(2,10);
@@ -880,11 +964,29 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
     .then(function(r){return r.json();})
     .then(function(data){
       if(!data.success){throw new Error(data.message||'send_failed');}
+      var user=fxUserData(fd);
       // Meta Pixel: kun ved bekræftet afsendelse, med segmentering på ydelse
-      if(window.fbq){fbq('track','Lead',{
-        content_category: fd.get('Område')||'Ikke angivet',
-        content_name: fd.get('Henvendelse')||'Rådgivning'
-      },{eventID:eventId});}
+      if(window.fbq){
+        // Advanced Matching sættes via init; pixel'en hasher selv værdierne
+        if(Object.keys(user).length){try{fbq('init',FX_PIXEL_ID,user);}catch(e){}}
+        fbq('track','Lead',{content_category: fd.get('Område')||'Ikke angivet'},{eventID:eventId});
+      }
+      // Kører siden i en iframe (fx en GHL-funnel)? Så sendes eventet op til
+      // forældresiden, hvor Pixel'en ligger med first-party cookies. Uden det
+      // ville Lead-eventet være låst inde i iframen.
+      if(window.parent && window.parent!==window){
+        try{
+          var parentOrigin=fxParentOrigin();
+          // Er listen tom, tillades alle domæner. Er den udfyldt, sendes
+          // oplysningerne kun til de nævnte.
+          var tillid=!FX_ALLOWED_PARENTS.length || FX_ALLOWED_PARENTS.indexOf(parentOrigin)!==-1;
+          window.parent.postMessage({
+            source:'farvexperten', event:'Lead', eventID:eventId,
+            content_category: fd.get('Område')||'Ikke angivet',
+            user: tillid ? user : undefined
+          }, (tillid && parentOrigin) ? parentOrigin : '*');
+        }catch(e){}
+      }
       // Samme event til CAPI med identisk event_id (deduplikering)
       fxSendCapi({
         event_name:'Lead',
@@ -895,9 +997,9 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
         navn:fd.get('Navn')||'',
         email:fd.get('email')||'',
         telefon:fd.get('Telefon')||'',
-        omraade:fd.get('Område')||'',
-        henvendelse:fd.get('Henvendelse')||''
+        omraade:fd.get('Område')||''
       });
+      try{localStorage.setItem('fx_sendt',String(Date.now()));}catch(e){}
       form.style.display='none';
       document.getElementById('formSuccess').style.display='block';
     })
@@ -947,6 +1049,25 @@ document.getElementById('leadForm').addEventListener('submit',function(e){
   if(/[?&]cookies=1/.test(location.search)){reopen();}
   else if(c==='all'){loadMeta(); loadAllMaps();}
   else if(c!=='necessary'){banner.classList.add('show');}
+})();
+
+// Har brugeren lige sendt formularen? Så vises kvitteringen ved genindlæsning
+// i stedet for et tomt felt. Det forhindrer, at samme person sender to gange
+// uden at opdage det. Man kan stadig sende igen via linket.
+(function(){
+  var GRAENSE=30*60*1000;   // 30 minutter
+  var form=document.getElementById('leadForm');
+  var kvit=document.getElementById('formSuccess');
+  var igen=document.getElementById('sendIgen');
+  try{
+    var t=parseInt(localStorage.getItem('fx_sendt')||'0',10);
+    if(t && Date.now()-t < GRAENSE){form.style.display='none'; kvit.style.display='block';}
+  }catch(e){}
+  if(igen){igen.addEventListener('click',function(e){
+    e.preventDefault();
+    try{localStorage.removeItem('fx_sendt');}catch(err){}
+    kvit.style.display='none'; form.style.display='block'; form.reset();
+  });}
 })();
 
 // Year
