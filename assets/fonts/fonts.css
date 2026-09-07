@@ -1,0 +1,17 @@
+/* Self-hostede fonte (latin-subset – dækker æøå). GDPR-venligt: ingen kald til Google. */
+@font-face{
+  font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;
+  src:url('poppins600.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Poppins';font-style:normal;font-weight:700;font-display:swap;
+  src:url('poppins700.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Roboto';font-style:normal;font-weight:300;font-display:swap;
+  src:url('roboto.woff2') format('woff2');
+}
+@font-face{
+  font-family:'Roboto';font-style:normal;font-weight:400;font-display:swap;
+  src:url('roboto.woff2') format('woff2');
+}

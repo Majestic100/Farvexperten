@@ -1,0 +1,48 @@
+<!--
+==============================================================================
+  IFRAME-OPSÆTNING TIL GHL
+  Indsæt HELE denne blok i et Custom HTML/Code-element på GHL-siden.
+==============================================================================
+
+  Hvorfor der er en <script>-del:
+  Landingssiden ligger på et andet domæne (github.io). Når den vises i en
+  iframe, kan Pixel'en derinde ikke sætte first-party cookies, og fbclid fra
+  annoncen når aldrig ind. Derfor:
+
+    - Pixel'en sættes op i GHL (på JERES domæne)  -> PageView + fbclid virker
+    - Formularen sender et signal op til denne side -> Lead fyres korrekt her
+
+  Begge events bærer samme eventID, så Meta deduplikerer mod CAPI.
+-->
+
+<iframe src="https://majestic100.github.io/Farvexperten/"
+        title="Farve X-perten"
+        style="position:fixed; inset:0; width:100%; height:100%; border:0;"></iframe>
+
+<script>
+(function () {
+  // Kun beskeder fra vores egen landingsside accepteres.
+  var TILLADT_DOMAENE = 'https://majestic100.github.io';
+  var PIXEL_ID = '1945994255700190';
+
+  window.addEventListener('message', function (e) {
+    if (e.origin !== TILLADT_DOMAENE) return;
+
+    var d = e.data;
+    if (!d || d.source !== 'farvexperten' || d.event !== 'Lead') return;
+
+    // Pixel'en er sat op i GHL, så fbq findes allerede her.
+    if (typeof fbq === 'function') {
+      // Advanced Matching: kundens oplysninger gives til pixel'en, så Meta kan
+      // matche konverteringen mod en profil og lære, hvem der konverterer.
+      // Pixel'en hasher selv værdierne, før de sendes.
+      if (d.user && Object.keys(d.user).length) {
+        try { fbq('init', PIXEL_ID, d.user); } catch (err) {}
+      }
+      fbq('track', 'Lead', {
+        content_category: d.content_category
+      }, { eventID: d.eventID });
+    }
+  });
+})();
+</script>
